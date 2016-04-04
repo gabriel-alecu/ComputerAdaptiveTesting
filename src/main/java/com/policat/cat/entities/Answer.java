@@ -8,21 +8,18 @@ class Answer {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String text;
 
+    @Column(nullable = false)
     private Boolean isCorrect;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Question question;
 
 
     public Answer() {}
-
-    public Answer(String text, Question question) {
-        this.text = text;
-        this.isCorrect = false;
-        this.question = question;
-    }
 
     public Answer(String text, Boolean isCorrect, Question question) {
         this.text = text;

@@ -10,11 +10,14 @@ class Question {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String text;
 
+    @Column(nullable = false)
     private Integer score;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question")

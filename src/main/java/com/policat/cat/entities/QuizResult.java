@@ -8,14 +8,15 @@ class QuizResult {
     @GeneratedValue
     private Long id;
 
-    @Column(columnDefinition = "FLOAT")   //bug fix, Oracle DB's floats are big enough anyway
+    @Column(columnDefinition = "FLOAT", nullable = false)   //float to fix validation bug, Oracle DB's floats are big enough anyway...
     private Double score;
 
-    @JoinColumn(name="`USER_ID`")   //fix for being lowercase, due to the user table fix
     @ManyToOne
+    @JoinColumn(name="`USER_ID`", nullable = false)   //fix for name being generated lowercase, due to the user table fix
     private User user;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Quiz quiz;
 
 

@@ -11,12 +11,13 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
-    private Boolean isAdmin;
+    private Boolean isAdmin=false;
 
     @OneToMany(mappedBy = "user")
     private Collection<QuizResult> quizResults = new ArrayList<>();

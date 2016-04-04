@@ -11,7 +11,7 @@ public class Quiz implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "quiz")
