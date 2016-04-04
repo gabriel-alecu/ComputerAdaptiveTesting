@@ -21,8 +21,10 @@ class QuizResult {
 
     public QuizResult() {}
 
-    public QuizResult(Double score) {
+    public QuizResult(Double score, User user, Quiz quiz) {
         this.score = score;
+        this.user = user;
+        this.quiz = quiz;
     }
 
     public Double getScore() {
@@ -31,5 +33,21 @@ class QuizResult {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

@@ -18,9 +18,16 @@ class Answer {
 
     public Answer() {}
 
-    public Answer(String text, Boolean isCorrect) {
+    public Answer(String text, Question question) {
+        this.text = text;
+        this.isCorrect = false;
+        this.question = question;
+    }
+
+    public Answer(String text, Boolean isCorrect, Question question) {
         this.text = text;
         this.isCorrect = isCorrect;
+        this.question = question;
     }
 
     public String getText() {
@@ -37,5 +44,13 @@ class Answer {
 
     public void setCorrect(Boolean correct) {
         isCorrect = correct;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }

@@ -23,9 +23,17 @@ class Question {
 
     public Question() {}
 
-    public Question(String text, Integer score) {
+    public Question(String text, Integer score, Quiz quiz) {
         this.text = text;
         this.score = score;
+        this.quiz = quiz;
+    }
+
+    public Question(String text, Integer score, Quiz quiz, Collection<Answer> answers) {
+        this.text = text;
+        this.score = score;
+        this.quiz = quiz;
+        this.answers = answers;
     }
 
     public String getText() {
@@ -42,5 +50,21 @@ class Question {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
+    public Collection<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Collection<Answer> answers) {
+        this.answers = answers;
     }
 }

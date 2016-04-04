@@ -27,11 +27,32 @@ public class Quiz implements Serializable {
         this.name = name;
     }
 
+    public Quiz(String name, Collection<Question> questions) {
+        this.name = name;
+        this.questions = questions;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Collection<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Collection<Question> questions) {
+        this.questions = questions;
+    }
+
+    public Collection<QuizResult> getQuizResults() {
+        return quizResults;
+    }
+
+    public void setQuizResults(Collection<QuizResult> quizResults) {
+        this.quizResults = quizResults;
     }
 }
