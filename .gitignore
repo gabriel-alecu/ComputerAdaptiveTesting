@@ -1,0 +1,16 @@
+# IntelliJ
+.idea/
+build/
+
+# Eclipse
+.settings/
+.classpath
+.project
+bin/
+
+# Gradle
+.gradle/
+
+# Libraries not available on maven
+local_libs/*
+!local_libs/README.txt
