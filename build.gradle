@@ -38,6 +38,8 @@ dependencies {
 	compile('org.springframework.session:spring-session')
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('com.oracle:ojdbc6:11.2.0.4')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 

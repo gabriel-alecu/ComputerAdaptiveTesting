@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set blue background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #CCFFCC;
+            height: 800px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+            <center>
+                <table width="100%"><img src="images/cv1.jpg" width="870px"/></table>
+            </center>
+            <center><h1>Computer Adaptive Testing</h1></center>
+            <br/>
+            <p><b> The Adaptive Quiz </b> activity enables a teacher to create tests that efficiently measure the
+                takers' abilities. Adaptive tests are comprised of questions selected from the question bank that are
+                tagged with a score of their difficulty. The questions are chosen to match the estimated ability level
+                of the current test taker. If the test taker succeeds on a question, a more challenging question is
+                presented next. If the test taker answers a question incorrectly, a less challenging question is
+                presented next. This technique will develop into a sequence of questions converging on the test taker's
+                effective ability level. The test stops when the test taker's ability is determined to the required
+                accuracy.</p>
+            <center><img src="images/cat.png" width="700px"/></center>
+            <p>The Adaptive Quiz activity uses the <a href="http://www.rasch.org/rmt/rmt22g.htm"> "Practical Adaptive
+                Testing CAT Algorithm" by B.D. Wright </a> published in Rasch Measurement Transactions(1988), and
+                discussed in John Linacre's <a href="http://www.rasch.org/memo69.pdf">"Computer-Adaptive Testing: A
+                    Methodology Whose Time Has Come" </a>. </p>
+            <hr/>
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p align="left">
+                    This is a Computer Adaptive Testing website.You can test your abilities in programming languages
+                    like
+                    Java,C++,etc following the next steps.<br/>
+                </p>
+            </div>
+            <div class="well">
+                <p align="left">
+                    <b>First Step</b><br/>First of all,you have to log in.<br/><br/>
+                    <b>Second Step</b><br/> Then, select the field/domain you want to be tested.<br/><br/>
+                    <b>Third Step</b><br/>Begin the quiz.A chronometer will start to countdown the time you have left
+                    for answering the questions.<br/><br/>
+                    <b>Forth Step</b><br/> Finish the quiz and get the results.<br/><br/><br/>
+                    <b>Congratulations! </b>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

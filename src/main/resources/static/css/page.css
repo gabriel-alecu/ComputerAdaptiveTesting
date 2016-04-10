@@ -1,0 +1,268 @@
+@CHARSET "ISO-8859-1";
+
+body 
+{
+	height: 100%; 
+	width: 100%;
+	padding: 0px; 
+	margin: 0px;
+	font-family:Arial; 
+	font-weight:normal; 
+	font-size:10pt;
+	color:#022E87; 
+	z-index:1;	
+}
+
+.mainDiv
+{
+	position: absolute;
+    top: 2px;
+    left: 50%;
+    margin-left: -400px;
+    width: 800px;
+    z-index:1;
+}
+
+.bannerImg
+{
+	width:800px;
+		
+}
+
+.contentDiv
+{
+	margin-left: 200px;
+	margin-right: 200px;
+	margin-top:20px;
+	height: 360px;	
+	display:none;
+	z-index: 1;
+}
+
+.contentTable
+{
+	width:480px;
+	z-index:1;	
+}
+
+.sectionTitle
+{
+	font-size:12pt;	
+	z-index:1;
+}
+
+.btnStyle
+{
+   color: #022E87;
+   font-family:Arial;
+   font-size:8pt;
+   font-weight:bold;
+   background-color:#C6DEF6;
+   border:2px outset;
+   width: 100px;
+   height: 23px;
+   cursor: pointer;
+   z-index:1;
+}
+
+.inputText
+{
+	width: 175px;
+	z-index:1;	
+}
+
+.selStyle
+{
+	width: 285px;
+	color:#022E87;
+	font-family:Arial; 
+	font-weight:normal; 
+	font-size:10pt;	
+	z-index:1;
+}
+
+.firstTd
+{
+	width:120px;
+	z-index:1;	
+}
+
+.questionsDiv
+{
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top:20px;
+	display: none;
+	background-color: #d3d3d3;
+	border:solid 2px #696969;
+	z-index:1;
+}
+
+.inputInfo
+{
+	width: 255px;
+	background-color: #D3D0C7;	
+    z-index:1;
+}
+
+.qsInfo
+{
+	width: 20px;
+	text-align: right;
+	background-color: #D3D0C7;	
+    z-index:1;
+}
+
+.qsText
+{
+	width: 450px;
+	height:50px;
+    z-index:1;
+}
+
+.answers
+{	
+	text-align:center;	
+    z-index:1;
+}
+
+.answersText
+{
+	width: 400px;
+	height:35px;
+    z-index:1;	
+}
+
+.divRight
+{
+	text-align:right;	
+   z-index:1;	
+}
+
+.divImg
+{
+	text-align: center;
+    z-index:1;
+}
+
+
+
+.qsImg
+{
+	width: 300px;
+	height: 200px;
+    z-index:1;		
+}
+
+.answersDiv
+{
+	margin-left: 200px;
+	margin-right: 200px;
+	margin-top:70px;
+	background-color: #d3d3d3;
+	border:solid 2px #696969;
+	display: none;
+    z-index:1;
+	
+}
+
+
+.incorrectAnswers
+{
+   color: #022E87;
+   font-family:Arial;
+   font-size:8pt;
+   font-weight:normal;
+   background-color:Red;
+   width: 23px;
+   height: 23px;
+   cursor: pointer;	
+   z-index:1;
+}
+
+.correctAnswers
+{
+   color: #022E87;
+   font-family:Arial;
+   font-size:8pt;
+   font-weight:normal;
+   background-color: Green;
+   width: 23px;
+   height: 23px;
+   cursor: pointer;	
+   z-index:1;
+}
+
+.introDiv
+{
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top:50px;
+	color: #022E87;
+	font-family:Arial;
+	font-size:10pt;
+	font-weight:normal;
+	text-align:justify;
+	z-index: 1;
+}
+
+.loadingDiv
+{
+	text-align:center;
+	display: none;
+	position: absolute;
+    top: 110px;
+    left: 50%;
+    margin-left: -400px;
+    width: 800px;
+    height: 410px;
+    z-index:5;
+    background-color:White;
+}
+
+.contactDiv
+{
+	text-align:center;
+	display:none;
+	position: absolute;	
+	bottom:10%;
+	left: 50%;
+	width:200px;
+    margin-left: -100px;
+    z-index:4;
+    color: #022E87;
+    font-family:Arial;
+    font-size:8pt;
+    font-weight:bold;
+    background-color:#C6DEF6;
+    border:solid 2px #022E87;
+}
+
+.managerLoginDiv
+{
+	margin-left: 250px;
+	margin-right: 250px;
+	margin-top:100px;
+	color: #022E87;
+	font-family:Arial;
+	font-size:10pt;
+	font-weight:normal;
+	text-align:justify;
+	border: outset 3px #022E87;
+}
+
+.tableTab
+{
+	text-align:left;
+	width: 700px;		
+}
+
+.firstRow
+{
+	font-weight: bold;
+	background-color:#8FABDA;
+}
+
+ 
+
+

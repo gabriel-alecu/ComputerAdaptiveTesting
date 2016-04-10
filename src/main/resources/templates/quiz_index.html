@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+
+    <style type="text/css">
+        #login {
+            position: relative;
+            top: 0px;
+            border: 1px solid gray;
+            padding: 50px;
+            background-color: #CCFFCC;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div id="login">
+
+        <h2 style="color:blue;">Login successful!!</h2>
+        <h4>
+            Hello,
+        </h4>
+        <center><img src="images/smiley.png" style="width:80px;height:80px;"/><br/></center>
+        <br/>
+
+
+        <h5> Select the domain you are interested to be tested:</h5><br/>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button"
+                    data-toggle="dropdown">
+                Choose one <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Java</a></li>
+                <li><a href="#">C++</a></li>
+                <li><a href="#">JavaScript</a></li>
+            </ul>
+        </div>
+
+
+        <br/>
+        <p>When you are ready to start the quiz, click on the button below. </p>
+
+        <button onclick="location.href='/quiz'">Begin Quiz</button>
+    </div>
+</div>
+
+</body>
+</html>  

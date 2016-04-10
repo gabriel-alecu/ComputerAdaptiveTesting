@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Login To Quiz Application</title>
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <section id="content">
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <h1>Hello stranger! :)</h1>
+            <div>
+                <input type="text" name="username" placeholder="Username" required="required" id="username"/>
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password" required="required" id="password"/>
+            </div>
+            <div>
+                <input type="submit" value="Log in"/>
+
+                <a href="#">Register</a>
+            </div>
+        </form><!-- form -->
+        <a href="#">
+            <img style="margin-top: 10px;" src="images/facebookloginbutton.png"/><br/><br/></a>
+    </section><!-- content -->
+</div><!-- container -->
+
+
+</body>
+</html>

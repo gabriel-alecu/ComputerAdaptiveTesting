@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Questions</title>
+
+    <link href="css/page.css" rel="stylesheet"/>
+    <style> /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    .qsText {
+        width: 450px;
+        height: 50px;
+        z-index: 1;
+    }
+
+    .answers {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .answersText {
+        width: 400px;
+        height: 35px;
+        z-index: 1;
+    }
+
+    .btnStyle {
+        color: #022E87;
+        font-family: Arial;
+        font-size: 8pt;
+        font-weight: bold;
+        background-color: #C6DEF6;
+        border: 2px outset;
+        width: 100px;
+        height: 23px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    </style>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <center><img src="images/quiz_time.jpg" id="titleImg" class="bannerImg"/></center>
+    <!--
+    Database connection
+     -->
+
+    <!--
+    Questions & Answers section
+     -->
+    <center>
+        <table frame="box" width="960px" style="background-color: #CCFFCC;">
+            <tr>
+                <td width="70px"><br/>&nbsp;&nbsp;<b>User</b></td>
+                <td width="400px"><br/>&nbsp;&nbsp;<input id="candidateName" value="" class="inputInfo" readonly="true"
+                                                          type="text"/></td>
+                <td class="sectionTitle" rowspan="2" colspan="2" width="400px">
+                    <form name="cd">
+                        <div class="divRight"><b>Time Remaining </b>
+                            <input id="counter" readonly="true" class="inputInfo" style="width:50px;" type="text"
+                                   value="5:00" name="disp"/>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="70px">&nbsp;&nbsp;<b>Category</b></td>
+                <td>&nbsp;&nbsp;<input id="examCategory" value="Java Programming" class="inputInfo" readonly="true"
+                                       type="text"/></td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2">
+                    <br/><br/>&nbsp;&nbsp;<textarea id="currentQs" class="qsText" rows="2" readonly="true"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span id="correct1" class="correct"></span>
+        		<span class="answers">
+        		&nbsp;&nbsp;<input id="answer1" type="checkbox"/></span>
+                </td>
+                <td>
+                    <br/><textarea id="a1" class="answersText" rows="2" readonly="true"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span id="correct2" class="correct"></span>
+        		<span class="answers">
+        		&nbsp;&nbsp;<input id="answer2" type="checkbox"/></span>
+                </td>
+                <td>
+                    <br/><textarea id="a2" class="answersText" rows="2" readonly="true"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span id="correct3" class="correct"></span>
+        		<span class="answers">
+        		&nbsp;&nbsp;<input id="answer3" type="checkbox"/></span>
+                </td>
+                <td>
+                    <br/><textarea id="a3" class="answersText" rows="2" readonly="true"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span id="correct4" class="correct"></span>
+        		<span class="answers">
+        		&nbsp;&nbsp;<input id="answer4" type="checkbox"/></span>
+                </td>
+                <td>
+                    <br/><textarea id="a4" class="answersText" rows="2" readonly="true"></textarea>
+                </td>
+
+                <td>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="btnNext" class="btnStyle">Next Question</button>
+                </td>
+                <td>
+                    <br/>
+                    <button class="btnStyle" onclick="location.href='/WEB_PROJECT/WebContent/score.jsp'">Finish</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td><br/><br/></td>
+            </tr>
+        </table>
+    </center>
+</div>
+
+<section layout:fragment="scripts" >
+    <script>
+        /*<![CDATA[*/
+        /*
+         ------------------------------------------------------------------------------------------------------------
+         T I M E R
+         ------------------------------------------------------------------------------------------------------------
+         */
+        var mins;
+        var secs;
+        function cd() {
+            mins = 1 * m("5"); // minute
+            secs = 0 + s(":00"); // secunde
+            redo();
+        }
+
+        function m(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                if (obj.substring(i, i + 1) == ":")
+                    break;
+            }
+            return (obj.substring(0, i));
+        }
+
+        function s(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                if (obj.substring(i, i + 1) == ":")
+                    break;
+            }
+            return (obj.substring(i + 1, obj.length));
+        }
+
+        function dis(mins, secs) {
+            var disp;
+            if (mins <= 9) {
+                disp = " 0";
+            } else {
+                disp = " ";
+            }
+
+            disp += mins + ":";
+            if (secs <= 9) {
+                disp += "0" + secs;
+            } else {
+                disp += secs;
+            }
+            return (disp);
+        }
+
+        function redo() {
+            secs--;
+            if (secs == -1) {
+                secs = 59;
+                mins--;
+            }
+            document.cd.disp.value = dis(mins, secs); // additional display setup
+            if ((mins == 0) && (secs == 0)) {
+                window.alert("Time is up. Press OK to view your score."); //timeout message
+                window.location = "score.jsp"; // redirects to score.jsp page once time is up
+            } else {
+                cd = setTimeout("redo()", 1000);
+            }
+        }
+
+        function init() {
+            cd();
+        }
+
+        window.onload = init;
+        /*
+         ------------------------------------------------------------------------------------------------------------
+         T I M E R	E N D
+         ------------------------------------------------------------------------------------------------------------
+         */
+        /*]]>*/
+    </script>
+</section>
+
+</body>
+</html>
