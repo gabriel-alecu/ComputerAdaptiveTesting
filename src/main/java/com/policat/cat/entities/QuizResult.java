@@ -28,6 +28,10 @@ public class QuizResult {
         this.quiz = quiz;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Double getScore() {
         return score;
     }

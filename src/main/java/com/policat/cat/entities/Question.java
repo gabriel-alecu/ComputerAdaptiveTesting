@@ -39,6 +39,10 @@ public class Question {
         this.answers = answers;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getText() {
         return text;
     }

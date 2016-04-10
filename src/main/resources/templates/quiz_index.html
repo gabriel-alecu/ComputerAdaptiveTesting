@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
 
@@ -32,23 +34,12 @@
 
         <h5> Select the domain you are interested to be tested:</h5><br/>
 
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button"
-                    data-toggle="dropdown">
-                Choose one <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Java</a></li>
-                <li><a href="#">C++</a></li>
-                <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div>
-
-
-        <br/>
-        <p>When you are ready to start the quiz, click on the button below. </p>
-
-        <button onclick="location.href='/quiz'">Begin Quiz</button>
+        <form th:action="@{/quiz}" method="post">
+            <div class="radio" th:each="q : ${quizzes}">
+                <label><input type="radio" name="quiz_id" th:value="${q}" th:text="${q.name}"/></label>
+            </div>
+            <input type="submit" value="Begin Quiz"/>
+        </form>
     </div>
 </div>
 

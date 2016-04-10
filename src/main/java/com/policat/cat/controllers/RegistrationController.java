@@ -18,7 +18,7 @@ public class RegistrationController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showRegistrationForm(WebRequest request, UserRegistrationDTO userRegistrationDTO) {
+    public String showRegistrationForm() {
         return "register";
     }
 
