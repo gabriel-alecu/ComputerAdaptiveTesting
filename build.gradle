@@ -12,11 +12,14 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'cat'
 	version = '0.0.1-SNAPSHOT'
+	manifest {
+		attributes 'Main-Class': 'com.policat.cat.CatApplication'
+	}
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -52,4 +55,4 @@ task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
 }
 
-defaultTasks = ["clean", "jar"]
+defaultTasks = ["clean", "build", "jar"]
