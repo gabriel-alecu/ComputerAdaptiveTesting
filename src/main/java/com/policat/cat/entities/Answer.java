@@ -3,7 +3,7 @@ package com.policat.cat.entities;
 import javax.persistence.*;
 
 @Entity
-class Answer {
+public class Answer {
     @Id
     @GeneratedValue
     private Long id;

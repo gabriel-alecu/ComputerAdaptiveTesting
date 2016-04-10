@@ -1,5 +1,7 @@
 package com.policat.cat.entities;
 
+import com.policat.cat.security.Role;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +19,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private Boolean isAdmin=false;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @OneToMany(mappedBy = "user")
     private Collection<QuizResult> quizResults = new ArrayList<>();
@@ -28,13 +31,12 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.isAdmin = false;
     }
 
-    public User(String username, String password, Boolean isAdmin) {
+    public User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -53,12 +55,12 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
+    public Role getRole() {
+        return role;
     }
 
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+    public void setRole(Role role) {
+        role = role;
     }
 
     public Collection<QuizResult> getQuizResults() {

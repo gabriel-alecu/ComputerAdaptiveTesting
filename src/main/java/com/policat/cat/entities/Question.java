@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-class Question {
+public class Question {
     @Id
     @GeneratedValue
     private Long id;
