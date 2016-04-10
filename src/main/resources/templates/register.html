@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Register</title>
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <section id="content">
+        <form th:action="@{/register}" method="post" th:object="${userRegistrationDTO}">
+            <ul th:if="${#fields.hasGlobalErrors()}">
+                <li th:each="err : ${#fields.globalErrors()}" th:text="${err}">Input is incorrect</li>
+            </ul>
+            <h1>Hello stranger! :)</h1>
+            <div>
+                <input type="text" th:field="*{username}"  placeholder="Username" required="required" id="username"/>
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
+            </div>
+            <div>
+                <input type="password" th:field="*{password}"  placeholder="Password" required="required" id="password"/>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            </div>
+            <div>
+                <input type="password" th:field="*{password_confirm}" placeholder="Password (confirm)" required="required" id="password_confirm"/>
+                <div th:if="${#fields.hasErrors('password_confirm')}" th:errors="*{password_confirm}">Password Confirm Error</div>
+            </div>
+            <div>
+                <input type="submit" value="Register"/>
+            </div>
+        </form><!-- form -->
+        <a href="#">
+            <img style="margin-top: 10px;" src="images/facebookloginbutton.png"/><br/><br/></a>
+    </section><!-- content -->
+</div><!-- container -->
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Registration complete</title>
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <p>Registration completed successfully!</p>
+    <p><a th:href="@{/}">Click here to go back to the main page</a></p>
+</div>
+
+
+</body>
+</html>
