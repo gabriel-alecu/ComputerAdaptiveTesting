@@ -4,25 +4,22 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Registration complete</title>
-
-    <link rel="stylesheet" href="css/style.css"/>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-    </style>
+    <title>Quiz Result</title>
 </head>
 <body>
 
 <div layout:fragment="content">
-    <p>Quiz completed successfully!</p>
-    <p>Score: <span th:text="${quizResult.score + '%'}"/></p>
-    <button th:onclick="'share(' + ${quizResult.score} + ',\'' + ${quizResult.quiz.name} + '\');'">Share to Facebook</button>
-    <p><a th:href="@{/}">Click here to go back to the main page</a></p>
+    <br/>
+    <h3>Quiz completed successfully!</h3>
+    <h4>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h4><hr/>
+    <!--<p><a th:href="@{/index}">Click here to go back to the main page</a></p>-->
+    <div align="center">
+        <button th:onclick="'share(' + ${quizResult.score} + ',\'' + ${quizResult.quiz.name} + '\');'">Share to Facebook</button>
+       <h2 style="text-align: center">Feedback Form</h2>
+        <iframe src="https://docs.google.com/forms/d/1JWsaoGHBHaFwy6WgtyHyo2gmENw-MndYKpB1xRf5Rkg/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
 </div>
+
 
 <section layout:fragment="scripts" >
     <script>

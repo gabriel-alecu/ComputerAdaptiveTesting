@@ -9,11 +9,58 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link rel="stylesheet" th:href="@{http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+
+    <style>
+        .jumbotron {
+            background-color: #33687b;
+            text-align: center;
+            color: white;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set blue background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: lightgrey;
+            height: 800px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        }
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
     <link rel="stylesheet" th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css}"/>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<!--<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -52,16 +99,71 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav>-->
 
-<div layout:fragment="content" class="container-fluid">
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1>&nbsp;&nbsp;Computer Adaptive Testing </h1>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+    <h5>&nbsp;&nbsp;&nbsp;Welcome <span sec:authentication="name">User</span>! &nbsp; <a th:href="@{/logout}"><b>[Logout]</b></a></h5>
+    </div>
 
+    <div class="col-sm-2 sidenav">
+
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1">Main Menu&nbsp;<span class="caret"></span></a></h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <ul class="list-group">
+                <a th:href="@{/index}">
+                    <li class="list-group-item">Home</li>
+                </a>
+                <a th:href="@{/about}">
+                    <li class="list-group-item">About</li>
+                </a>
+            </ul>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/quiz}">Quiz</a></h4>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/logout}">Logout</a></h4>
+        </div>
+
+        <div sec:authorize="isAnonymous()" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/login}">Login</a></h4>
+        </div>
+
+
+        <div sec:authorize="isAnonymous()" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/register}">Register</a></h4>
+        </div>
+
+        <!--<div sec:authorize="hasRole('ADMIN')" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/admin}">Admin Panel</a></h4>
+        </div>-->
+
+        <hr/>
+        <br/>
+        <div class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/contact}">Contact</a></h4>
+        </div>
+    </div>
+
+
+    <div layout:fragment="content" class="col-sm-10 text-left">
+
+    </div>
 </div>
 
 <footer class="container-fluid text-center">
     <p>@Copyright: **PoliCAT Team** POLITEHNICA University Bucarest-Computer Science Department,2016</p>
 </footer>
 
+<script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js}"></script>
 <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js}"></script>
 <script th:src="@{///maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 
