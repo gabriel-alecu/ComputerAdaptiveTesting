@@ -1,1 +1,1 @@
-web: java -jar -Dport=$PORT build/libs/cat-0.0.1-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dport=$PORT -jar build/libs/cat-0.0.1-SNAPSHOT.jar
