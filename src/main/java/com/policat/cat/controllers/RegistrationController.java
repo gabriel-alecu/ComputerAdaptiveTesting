@@ -1,13 +1,13 @@
 package com.policat.cat.controllers;
 
-import com.policat.cat.dtos.UserRegistrationDTO;
+import com.policat.cat.temp_containers.UserRegistrationDTO;
 import com.policat.cat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,7 @@ public class RegistrationController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showRegistrationForm() {
+    public String showRegistrationForm(UserRegistrationDTO userRegistrationDTO) {
         return "register";
     }
 

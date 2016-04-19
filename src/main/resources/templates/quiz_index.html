@@ -28,7 +28,7 @@
         <h4>
             Hello,
         </h4>
-        <img src="images/smiley.png" style="width:80px;height:80px;"/><br/>
+        <img th:src="@{/images/smiley.png}" style="width:80px;height:80px;"/><br/>
         <br/>
 
 
@@ -36,7 +36,7 @@
 
         <form th:action="@{/quiz}" method="post">
             <div class="radio" th:each="q : ${quizzes}">
-                <label><input type="radio" name="quiz_id" th:value="${q}" th:text="${q.name}"/></label>
+                <label><input type="radio" name="quiz" th:value="${q.getId()}" th:text="${q.getName()}"/></label>
             </div>
             <input type="submit" value="Begin Quiz"/>
         </form>

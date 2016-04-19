@@ -3,7 +3,7 @@ package com.policat.cat.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Quiz implements Serializable {
@@ -15,10 +15,10 @@ public class Quiz implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "quiz")
-    private Collection<Question> questions = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "quiz")
-    private Collection<QuizResult> quizResults = new ArrayList<>();
+    private List<QuizResult> quizResults = new ArrayList<>();
 
 
     public Quiz() {}
@@ -27,7 +27,7 @@ public class Quiz implements Serializable {
         this.name = name;
     }
 
-    public Quiz(String name, Collection<Question> questions) {
+    public Quiz(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
     }
@@ -44,19 +44,19 @@ public class Quiz implements Serializable {
         this.name = name;
     }
 
-    public Collection<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Collection<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
-    public Collection<QuizResult> getQuizResults() {
+    public List<QuizResult> getQuizResults() {
         return quizResults;
     }
 
-    public void setQuizResults(Collection<QuizResult> quizResults) {
+    public void setQuizResults(List<QuizResult> quizResults) {
         this.quizResults = quizResults;
     }
 }

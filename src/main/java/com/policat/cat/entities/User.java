@@ -1,10 +1,10 @@
 package com.policat.cat.entities;
 
-import com.policat.cat.security.Role;
+import com.policat.cat.auth.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="`USER`")   //need this because it's a reserved word
@@ -23,7 +23,7 @@ public class User {
     private Role role = Role.USER;
 
     @OneToMany(mappedBy = "user")
-    private Collection<QuizResult> quizResults = new ArrayList<>();
+    private List<QuizResult> quizResults = new ArrayList<>();
 
 
     public User() {}
@@ -67,11 +67,11 @@ public class User {
         role = role;
     }
 
-    public Collection<QuizResult> getQuizResults() {
+    public List<QuizResult> getQuizResults() {
         return quizResults;
     }
 
-    public void setQuizResults(Collection<QuizResult> quizResults) {
+    public void setQuizResults(List<QuizResult> quizResults) {
         this.quizResults = quizResults;
     }
 }

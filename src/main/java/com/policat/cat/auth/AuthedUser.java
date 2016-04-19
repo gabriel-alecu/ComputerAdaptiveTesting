@@ -1,4 +1,4 @@
-package com.policat.cat.security;
+package com.policat.cat.auth;
 
 import com.policat.cat.entities.User;
 import org.springframework.security.core.authority.AuthorityUtils;

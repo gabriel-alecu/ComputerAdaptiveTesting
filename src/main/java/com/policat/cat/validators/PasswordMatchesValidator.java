@@ -1,6 +1,6 @@
 package com.policat.cat.validators;
 
-import com.policat.cat.dtos.UserRegistrationDTO;
+import com.policat.cat.temp_containers.UserRegistrationDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

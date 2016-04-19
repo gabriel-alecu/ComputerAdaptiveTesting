@@ -2,7 +2,7 @@ package com.policat.cat.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Question {
@@ -21,7 +21,7 @@ public class Question {
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question")
-    private Collection<Answer> answers = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
 
     public Question() {}
@@ -32,7 +32,7 @@ public class Question {
         this.quiz = quiz;
     }
 
-    public Question(String text, Integer score, Quiz quiz, Collection<Answer> answers) {
+    public Question(String text, Integer score, Quiz quiz, List<Answer> answers) {
         this.text = text;
         this.score = score;
         this.quiz = quiz;
@@ -67,11 +67,11 @@ public class Question {
         this.quiz = quiz;
     }
 
-    public Collection<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Collection<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 }

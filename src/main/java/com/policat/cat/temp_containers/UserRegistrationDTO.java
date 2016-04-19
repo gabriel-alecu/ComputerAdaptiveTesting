@@ -1,4 +1,4 @@
-package com.policat.cat.dtos;
+package com.policat.cat.temp_containers;
 
 import com.policat.cat.validators.PasswordMatches;
 
@@ -9,8 +9,7 @@ import javax.validation.constraints.Size;
 public class UserRegistrationDTO {
     @Size(min=2, max=30)
     private String username;
-
-    @NotNull
+    
     @Size(min=6)
     private String password;
 

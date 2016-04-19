@@ -1,4 +1,4 @@
-package com.policat.cat.security;
+package com.policat.cat.auth;
 
 public enum Role {
     USER, ADMIN
