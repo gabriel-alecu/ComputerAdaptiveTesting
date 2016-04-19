@@ -15,6 +15,10 @@
         Question
     </div>
 
+    <div th:text="${ongoingQuiz.getCurrentQuestion().getText()}">
+        Question
+    </div>
+
     <form th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
         <div th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
             <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
@@ -28,6 +32,38 @@
 
 <section layout:fragment="scripts" >
 </section>
+
+<script>
+    function getTimeRemaining(endtime){
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        return {
+            'total': t,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime){
+        var clock = document.getElementById(id);
+        var timeinterval = setInterval(function(){
+            var t = getTimeRemaining(endtime);
+            clock.innerHTML = 'minutes: ' + t.minutes + '<br>' +
+                    'seconds: ' + t.seconds;
+            if(t.total<=0){
+                clearInterval(timeinterval);
+            }
+        },1000);
+    }
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var quizEnd = /*[[${ongoingQuiz.}]]*/ '0';
+    initializeClock('clockdiv', quizEnd);
+    /*]]>*/
+</script>
 
 </body>
 </html>

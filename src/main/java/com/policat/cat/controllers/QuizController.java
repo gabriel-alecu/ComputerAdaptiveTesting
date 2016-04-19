@@ -36,7 +36,11 @@ public class QuizController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showQuizzesList(Model model) {
+        AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = auth.getUser();
+
         model.addAttribute("quizzes", quizRepository.findAll());
+        model.addAttribute("resolved", quizResultRepository.findByUser(user));
         return "quiz_index";
     }
 

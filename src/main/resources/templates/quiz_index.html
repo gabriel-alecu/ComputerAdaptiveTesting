@@ -40,6 +40,10 @@
             </div>
             <input type="submit" value="Begin Quiz"/>
         </form>
+
+        <div th:each="result : ${resolved}">
+            <span th:text="${#dates.format(result.date, 'dd/MMM/yyyy-HH:mm')}"></span>: <span th:text="${result.quiz.name}"></span> - <span th:text="${result.score +'%'}"></span>
+        </div>
     </div>
 </div>
 
