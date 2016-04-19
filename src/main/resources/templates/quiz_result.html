@@ -20,9 +20,36 @@
 <div layout:fragment="content">
     <p>Quiz completed successfully!</p>
     <p>Score: <span th:text="${quizResult.score + '%'}"/></p>
+    <button th:onclick="'share(' + ${quizResult.score} + ',\'' + ${quizResult.quiz.name} + '\');'">Share to Facebook</button>
     <p><a th:href="@{/}">Click here to go back to the main page</a></p>
 </div>
 
+<section layout:fragment="scripts" >
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '236976676635446',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
 
+        function share(score, domain) {
+            FB.ui({
+                method: 'share',
+                href: 'http://policat.herokuapp.com',
+                quote: "I just got a score of "+score+"% on the "+domain+" quiz from POLICAT!"
+            }, function(response){});
+        }
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</section>
 </body>
 </html>

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="`USER`")   //need this because it's a reserved word
 public class User {
     @Id
     @GeneratedValue

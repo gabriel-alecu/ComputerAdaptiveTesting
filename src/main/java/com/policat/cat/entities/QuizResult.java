@@ -12,15 +12,15 @@ public class QuizResult {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)   //float to fix validation bug, Oracle DB's floats are big enough anyway...
+    @Column(nullable = false)
     private Integer score;
 
-    @Column(name="`DATE`", nullable=false)
+    @Column(nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name="`USER_ID`", nullable = false)   //fix for name being generated lowercase, due to the user table fix
+    @JoinColumn(nullable = false)
     private User user;
 
     @ManyToOne
