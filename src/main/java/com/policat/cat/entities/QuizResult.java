@@ -8,8 +8,8 @@ public class QuizResult {
     @GeneratedValue
     private Long id;
 
-    @Column(columnDefinition = "FLOAT", nullable = false)   //float to fix validation bug, Oracle DB's floats are big enough anyway...
-    private Double score;
+    @Column(nullable = false)   //float to fix validation bug, Oracle DB's floats are big enough anyway...
+    private Integer score;
 
     @ManyToOne
     @JoinColumn(name="`USER_ID`", nullable = false)   //fix for name being generated lowercase, due to the user table fix
@@ -22,7 +22,7 @@ public class QuizResult {
 
     public QuizResult() {}
 
-    public QuizResult(Double score, User user, Quiz quiz) {
+    public QuizResult(Integer score, User user, Quiz quiz) {
         this.score = score;
         this.user = user;
         this.quiz = quiz;
@@ -32,11 +32,11 @@ public class QuizResult {
         return id;
     }
 
-    public Double getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

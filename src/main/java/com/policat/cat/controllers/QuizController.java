@@ -122,7 +122,7 @@ public class QuizController {
             return "redirect:/quiz/question";
         }
 
-        Double score = quizService.calcFinalScore(ongoingQuiz);
+        Integer score = quizService.calcFinalScore(ongoingQuiz);
 
         AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = auth.getUser();
