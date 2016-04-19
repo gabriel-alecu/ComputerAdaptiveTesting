@@ -21,16 +21,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a th:href="@{/}"><img th:src="@{/images/logo-cat.jpg}" height="50px"/></a>
+            <a class="navbar-brand" href="#">Computer Adaptive Testing</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li th:classappend="${#httpServletRequest.getRequestURI() == '/'}?'active' : ''">
                     <a th:href="@{/}">Home</a>
                 </li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/'}?'active' : ''">
+                    <a th:href="@{/}">About</a>
+                </li>
                 <li sec:authorize="isAuthenticated()" th:classappend="${#httpServletRequest.getRequestURI() == '/quiz'}?'active' : ''">
                     <a th:href="@{/quiz}">Quiz</a>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li sec:authorize="isAuthenticated()" class="dropdown">
@@ -55,7 +59,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-    <p>@Copyright: Melania Nitu, POLITEHNICA University Bucarest-Computer Science Department,2016</p>
+    <p>@Copyright: **PoliCAT Team** POLITEHNICA University Bucarest-Computer Science Department,2016</p>
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

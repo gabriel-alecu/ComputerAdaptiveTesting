@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <title>About</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <style>
+        h1 {
+            color: blue;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set blue background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #CCFFCC;
+            height: 800px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        }
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron">
+    <h1>&nbsp;&nbsp;Computer Adaptive Testing Application</h1>
+</div>
+<h5>&nbsp;&nbsp;&nbsp;Welcome! &nbsp;</h5>
+<div class="col-sm-2 sidenav">
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Main Menu</a></h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">View Site</li>
+            </a>
+        </ul>
+    </div>
+
+
+
+</div>
+
+
+<div class="col-sm-8 text-left">
+    <h3>About</h3>
+    <br/>
+    <p><b> The Adaptive Quiz </b> activity enables a teacher to create tests that efficiently measure the
+        takers' abilities. Adaptive tests are comprised of questions selected from the question bank that are
+        tagged with a score of their difficulty. The questions are chosen to match the estimated ability level
+        of the current test taker. If the test taker succeeds on a question, a more challenging question is
+        presented next. If the test taker answers a question incorrectly, a less challenging question is
+        presented next. This technique will develop into a sequence of questions converging on the test taker's
+        effective ability level. The test stops when the test taker's ability is determined to the required
+        accuracy.</p>
+    <p>The Adaptive Quiz activity uses the <a href="http://www.rasch.org/rmt/rmt22g.htm"> "Practical Adaptive
+        Testing CAT Algorithm" by B.D. Wright </a> published in Rasch Measurement Transactions(1988), and
+        discussed in John Linacre's <a href="http://www.rasch.org/memo69.pdf">"Computer-Adaptive Testing: A
+            Methodology Whose Time Has Come" </a>. </p>
+    <hr/>
+
+</div>
+</body>
+</html>

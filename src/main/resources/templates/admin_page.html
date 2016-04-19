@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <title>CAT Admin</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/kalendar.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="kalendar.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.kalendar').kalendar({
+                events: [
+                    {
+                        title: "Event 1",
+                        url: "http://www.jqueryscript.net",
+                        start: {
+                            date: 20140115,
+                            time: "12.00"
+                        },
+                        end: {
+                            date: "20140116",
+                            time: "14.00"
+                        },
+                        location: "London",
+                        color: "yellow"
+
+                    },
+                    {
+                        title: "Event 2",
+                        url: "http://www.jqueryscript.net",
+                        start: {
+                            date: 20140115,
+                            time: "12.00"
+                        },
+                        end: {
+                            date: "20140116",
+                            time: "14.00"
+                        },
+                        location: "London",
+                        color: "blue"
+
+                    },
+                    {
+                        title: "Event 3",
+                        url: "http://www.jqueryscript.net",
+                        start: {
+                            date: 20140115,
+                            time: "12.00"
+                        },
+                        end: {
+                            date: "20140116",
+                            time: "14.00"
+                        },
+                        location: "London"
+
+                    },
+                    {
+                        title: "Way Out West",
+                        start: {
+                            date: 20131230,
+                            time: "12.00"
+                        },
+                        end: {
+                            date: "20140106",
+                            time: "14.00"
+                        },
+                        location: "Gothenburg",
+                        color: "yellow"
+
+                    }
+                ],
+                color: "green",
+                firstDayOfWeek: "Sunday",
+                eventcolors: {
+                    yellow: {
+                        background: "#FC0",
+                        text: "#000",
+                        link: "#000"
+                    },
+                    blue: {
+                        background: "#6180FC",
+                        text: "#FFF",
+                        link: "#FFF"
+                    }
+                }
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <style>
+        h1 {
+            color: blue;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set blue background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #CCFFCC;
+            height: 800px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        }
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="jumbotron">
+    <h1>&nbsp;&nbsp;Admin Panel</h1>
+</div>
+<h5>&nbsp;&nbsp;&nbsp;Welcome Admin! &nbsp; <a href="#"><b>[Logout]</b></a></h5>
+<div class="col-sm-2 sidenav">
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Main Menu</a></h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Admin Home</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Site</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Logout</li>
+            </a>
+        </ul>
+    </div>
+
+
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse2">
+            <span class="glyphicon glyphicon-th"></span>&nbsp;General Menu</a></h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Add Quiz Domains&Questions</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Database</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Users</li>
+            </a>
+        </ul>
+    </div>
+
+
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse3"><span class="glyphicon glyphicon-user"></span>&nbsp;Account</a></h4>
+
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Change Password</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Add another admin</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Delete account</li>
+            </a>
+        </ul>
+    </div>
+
+</div>
+
+<div class="col-sm-8 text-left">
+<h3>Computer Adaptive Quiz Application</h3>
+    <div class="wrapper">
+        <div class="kalendar"></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

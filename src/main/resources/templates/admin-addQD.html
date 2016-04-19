@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+            xmlns:th="http://www.thymeleaf.org"
+            layout:decorator="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Adaptive Testing</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+    <style>
+        h1 {
+            color: blue;
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set blue background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #CCFFCC;
+            height: 800px;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        }
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron">
+    <h1>&nbsp;&nbsp;Admin Panel</h1>
+</div>
+<h5>&nbsp;&nbsp;&nbsp;Welcome Admin! &nbsp; <a href="#"><b>[Logout]</b></a></h5>
+<div class="col-sm-2 sidenav">
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Main Menu</a></h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Admin Home</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Site</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Logout</li>
+            </a>
+        </ul>
+    </div>
+
+
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse2">
+            <span class="glyphicon glyphicon-th"></span>&nbsp;General Menu</a></h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Add Quiz Domains&Questions</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Database</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">View Users</li>
+            </a>
+        </ul>
+    </div>
+
+
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse3"><span class="glyphicon glyphicon-user"></span>&nbsp;Account</a></h4>
+
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Change Password</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Add another admin</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Delete account</li>
+            </a>
+        </ul>
+    </div>
+
+</div>
+
+
+<div class="col-sm-8 text-left">
+    <h3>Add a new question to your Computer Adapted Quiz Application</h3><br />
+
+    <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputDomain" class="control-label col-xs-2">Question Domain</label>
+                <div class="col-xs-10">
+                    <input class="form-control" id="inputDomain" placeholder="Domain">
+                </div>
+            </div>
+        <div class="form-group">
+            <label for="inputScore" class="control-label col-xs-2">Question Score</label>
+            <div class="col-xs-10">
+                <input class="form-control" id="inputScore" placeholder="Question score from 1 to 5 (1 < 5) ">
+            </div>
+        </div>
+            <div class="form-group">
+                <label for="inputQuestion" class="control-label col-xs-2">Question Text</label>
+                <div class="col-xs-10">
+                    <input class="form-control" id="inputQuestion" placeholder="Question">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputA1" class="control-label col-xs-2">Answer 1</label>
+                <div class="col-xs-7">
+                    <input class="form-control" id="inputA1" placeholder="First Answer">
+                </div>
+                <label for="inputA1cb" class="control-label col-xs-2">Correct</label>
+                <div class="col-xs-1">
+                    <input type="checkbox" class="form-control" id="inputA1cb">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputA2" class="control-label col-xs-2">Answer 2</label>
+                <div class="col-xs-7">
+                    <input class="form-control" id="inputA2" placeholder="Second Answer">
+                </div>
+                <label for="inputA1cb" class="control-label col-xs-2">Correct</label>
+                <div class="col-xs-1">
+                    <input type="checkbox" class="form-control" id="inputA1cb">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputA3" class="control-label col-xs-2">Answer 3</label>
+                <div class="col-xs-7">
+                    <input class="form-control" id="inputA3" placeholder="Third Answer">
+                </div>
+                <label for="inputA1cb" class="control-label col-xs-2">Correct</label>
+                <div class="col-xs-1">
+                    <input type="checkbox" class="form-control" id="inputA1cb">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputA4" class="control-label col-xs-2">Answer 4</label>
+                <div class="col-xs-7">
+                    <input class="form-control" id="inputA4" placeholder="Forth Answer">
+                </div>
+                <label for="inputA1cb" class="control-label col-xs-2">Correct</label>
+                <div class="col-xs-1">
+                    <input type="checkbox" class="form-control" id="inputA1cb">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+    </form>
+
+
+</div>
+
+</body>
+</html>

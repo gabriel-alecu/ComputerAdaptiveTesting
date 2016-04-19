@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorator="layout">
 <head>
+    <title>Computer Adaptive Testing</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <style>
+
+
+        .jumbotron{
+            background-color: #33687b;
+            text-align:center;
+            color: white;
+        }
+
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;
@@ -18,7 +36,7 @@
         /* Set blue background color and 100% height */
         .sidenav {
             padding-top: 20px;
-            background-color: #CCFFCC;
+            background-color: lightgrey;
             height: 800px;
         }
 
@@ -29,6 +47,7 @@
             padding: 15px;
         }
 
+        }
         /* On small screens, set height to 'auto' for sidenav and grid */
         @media screen and (max-width: 767px) {
             .sidenav {
@@ -42,59 +61,132 @@
         }
     </style>
 </head>
-
 <body>
-
 <div layout:fragment="content">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-        </div>
-        <div class="col-sm-8 text-left">
-            <center>
-                <table width="100%"><img src="images/cv1.jpg" width="870px"/></table>
-            </center>
-            <center><h1>Computer Adaptive Testing</h1></center>
-            <br/>
-            <p><b> The Adaptive Quiz </b> activity enables a teacher to create tests that efficiently measure the
-                takers' abilities. Adaptive tests are comprised of questions selected from the question bank that are
-                tagged with a score of their difficulty. The questions are chosen to match the estimated ability level
-                of the current test taker. If the test taker succeeds on a question, a more challenging question is
-                presented next. If the test taker answers a question incorrectly, a less challenging question is
-                presented next. This technique will develop into a sequence of questions converging on the test taker's
-                effective ability level. The test stops when the test taker's ability is determined to the required
-                accuracy.</p>
-            <center><img src="images/cat.png" width="700px"/></center>
-            <p>The Adaptive Quiz activity uses the <a href="http://www.rasch.org/rmt/rmt22g.htm"> "Practical Adaptive
-                Testing CAT Algorithm" by B.D. Wright </a> published in Rasch Measurement Transactions(1988), and
-                discussed in John Linacre's <a href="http://www.rasch.org/memo69.pdf">"Computer-Adaptive Testing: A
-                    Methodology Whose Time Has Come" </a>. </p>
-            <hr/>
+<div class="jumbotron">
+    <h1>&nbsp;&nbsp;Computer Adaptive Testing </h1>
+</div>
 
-        </div>
-        <div class="col-sm-2 sidenav">
-            <div class="well">
-                <p align="left">
-                    This is a Computer Adaptive Testing website.You can test your abilities in programming languages
-                    like
-                    Java,C++,etc following the next steps.<br/>
-                </p>
-            </div>
-            <div class="well">
-                <p align="left">
-                    <b>First Step</b><br/>First of all,you have to log in.<br/><br/>
-                    <b>Second Step</b><br/> Then, select the field/domain you want to be tested.<br/><br/>
-                    <b>Third Step</b><br/>Begin the quiz.A chronometer will start to countdown the time you have left
-                    for answering the questions.<br/><br/>
-                    <b>Forth Step</b><br/> Finish the quiz and get the results.<br/><br/><br/>
-                    <b>Congratulations! </b>
-                </p>
-            </div>
-        </div>
+<div class="col-sm-2 sidenav">
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1">Main Menu&nbsp;<span class="caret"></span></a></h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">View Site</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Logout</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" href="#collapse3">Account&nbsp;<span class="caret"></span></a></h4>
+
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+        <ul class="list-group">
+            <a href="#">
+                <li class="list-group-item">Change Password</li>
+            </a>
+            <a href="#">
+                <li class="list-group-item">Delete account</li>
+            </a>
+        </ul>
     </div>
 </div>
 
+
+<div class="col-sm-10 text-left">
+
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="images/knowledge.jpg" />
+                            <div class="carousel-caption">
+
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img src="images/takethequiz.jpg" />
+                            <div class="carousel-caption">
+
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img src="images/cat.png" />
+                            <div class="carousel-caption">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="well">
+                    <h3>You want to test your programming language theory before the exam? </h3>
+                    <p>Login and take the quiz adapted for your level. Find out if you're ready, and share the score with your friends. Let the game begin!</p>
+                    <p><b>Good luck!</b></p>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <h2><b>Some of the most popular programming languages that you can test your level on our website</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                &nbsp;
+            </div>
+
+            <div class="col-sm-3">
+                <div class="well">
+                    <a href="http://tutorialspoint.com/java/"><p><b>Java</b></p></a>
+                </div>
+                <div class="well">
+                    <a href="http://www.tutorialspoint.com//cprogramming/index.htm"><p><b>C</b></p></a>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="well">
+                    <a href="http://www.tutorialspoint.com//javascript/index.htm"><p><b>JavaScript</b></p></a>
+                </div>
+                <div class="well">
+                    <a href="http://www.tutorialspoint.com//python/index.htm"><p><b>Python</b></p></a>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+    </div>
+
+
+</div>
 </body>
 </html>
