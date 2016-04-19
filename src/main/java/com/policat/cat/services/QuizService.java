@@ -58,7 +58,7 @@ public class QuizService {
     public Question chooseNextQuestion(OngoingQuiz ongoingQuiz) {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        if(ongoingQuiz.getEndTime().after(now)) {
+        if(ongoingQuiz.getEndTime().before(now)) {
             return null;
         }
 
@@ -151,7 +151,14 @@ public class QuizService {
                 totalScore += response.getQuestion().getScore();
             }
         }
-        return totalScore*100/totalPossibleScore;
+
+        Integer finalScore;
+        if(totalPossibleScore.equals(0)) {
+            finalScore = 0;
+        } else {
+            finalScore = totalScore*100/totalPossibleScore;
+        }
+        return finalScore;
     }
 
     public void debugLastResponse(OngoingQuiz ongoingQuiz) {
