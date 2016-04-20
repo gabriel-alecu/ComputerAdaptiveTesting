@@ -5,21 +5,14 @@
       layout:decorator="layout">
 <head>
     <title>Registration complete</title>
-
-    <link rel="stylesheet" href="css/style.css"/>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-    </style>
 </head>
 <body>
 
 <div layout:fragment="content">
-    <p>Registration completed successfully!</p>
-    <p><a th:href="@{/}">Click here to go back to the main page</a></p>
+    <br/>
+    <h3>Registration completed successfully!</h3>
+    <h5>You may now go to login page.</h5><hr/>
+    <p><a th:href="@{/index}">Click here to go back to the main page</a></p>
 </div>
 
 
