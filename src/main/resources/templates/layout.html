@@ -156,9 +156,9 @@
             <h4 class="panel-title"><a th:href="@{/register}">Register</a></h4>
         </div>
 
-        <!--<div sec:authorize="hasRole('ADMIN')" class="panel-heading">
+        <div sec:authorize="hasAuthority('ADMIN')" class="panel-heading">
             <h4 class="panel-title"><a th:href="@{/admin}">Admin Panel</a></h4>
-        </div>-->
+        </div>
 
         <hr/>
 
