@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Adaptive Quiz</title>
-    <link href="css/page.css" rel="stylesheet"/>
+    <title>Questions</title>
 </head>
+
 <body>
 
-    <div layout:fragment="content">
+<div layout:fragment="content">
 
-        <div style="text-align: right"> <h4 style="color:#004669"><b>Time left: <span id="clockdiv"></span></b></h4></div><br/>
+    <div>Time left: <span id="clockdiv"></span></div>
 
-        <h3><b><div th:text="${ongoingQuiz.getCurrentQuestion().getText()}"></div></b></h3><hr/>
+    <div th:text="${ongoingQuiz.getCurrentQuestion().getText()}">
+        Question
+    </div>
 
-        <div >
-            <form th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
-               <div th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
-                 <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
-                  <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${answer.text}">Answer</label>
-              </div>
-                <br/><br/>
-                <button type="submit" class="btn btn-primary" value="Next">Next</button>
-           </form>
+    <form th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
+        <div th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
+            <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
+            <label th:for="${#ids.prev('currentSelectedAnswers')}"
+                   th:text="${answer.text}">Answer</label>
+        </div>
+        <input type="submit" value="Next"/>
+    </form>
 
-
-</div></div>
-
+</div>
 
 <section layout:fragment="scripts" >
     <script>
@@ -46,8 +46,8 @@
             var clock = document.getElementById(id);
             var timeinterval = setInterval(function(){
                 var t = getTimeRemaining(endtime);
-                clock.innerHTML = t.minutes + ' min' +  ' ' +
-                        t.seconds + ' sec ';
+                clock.innerHTML = t.minutes + ' minutes' +  ' ' +
+                        t.seconds + ' seconds: ';
                 if(t.total<=0){
                     clearInterval(timeinterval);
                 }
