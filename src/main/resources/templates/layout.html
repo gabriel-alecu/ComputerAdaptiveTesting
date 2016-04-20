@@ -47,7 +47,6 @@
             padding: 15px;
         }
 
-        }
         /* On small screens, set height to 'auto' for sidenav and grid */
         @media screen and (max-width: 767px) {
             .sidenav {
@@ -62,6 +61,10 @@
 
         .logo_link:hover, .logo_link:active {
             text-decoration: none;
+        }
+
+        body {
+            padding-top: 4px;
         }
     </style>
 </head>
@@ -109,7 +112,7 @@
 </nav>-->
 
 <div class="container-fluid">
-    <a th:href="@{/}" class="logo_link">"<div class="jumbotron">
+    <a th:href="@{/}" class="logo_link"><div class="jumbotron">
         <h1>&nbsp;&nbsp;Computer Adaptive Testing </h1>
     </div></a>
     <div sec:authorize="isAuthenticated()">
