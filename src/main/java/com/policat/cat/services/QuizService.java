@@ -18,7 +18,7 @@ public class QuizService {
     public static final int MAX_TIME = 30;  //minutes
 
     public static final int MAX_QUESTIONS = 30;
-    public static final int MAX_SAME_SCORE = 5;
+    public static final int MAX_SAME_SCORE = 3;
     public static final int MAX_CONSECUTIVE_WRONG = 5;
 
     public static final int MAX_QUESTION_SCORE = 5;
