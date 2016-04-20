@@ -33,9 +33,11 @@
 
         function share(score, domain) {
             FB.ui({
-                method: 'share',
-                href: 'http://policat.herokuapp.com',
-                quote: "I just got a score of "+score+"% on the "+domain+" quiz from PoliCAT!"
+                method: 'feed',
+                link: 'https://policat.herokuapp.com',
+                caption: "I just completed a "+domain+" quiz from PoliCAT!",
+                description: "And I got a score of: "+score+"%",
+                picture: '/images/knowledge.jpg'
             }, function(response){});
         }
 
