@@ -34,6 +34,11 @@ public class QuizController {
     QuizResultRepository quizResultRepository;
 
 
+    @ModelAttribute("ongoingQuiz")
+    public OngoingQuiz getDefaultQuiz() {
+        return new OngoingQuiz();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String showQuizzesList(Model model) {
         AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
