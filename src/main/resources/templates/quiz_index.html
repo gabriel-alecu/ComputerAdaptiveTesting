@@ -1,51 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
+    <title>Select domain</title>
 
-    <style type="text/css">
-        #login {
-            position: relative;
-            top: 0px;
-            border: 1px solid gray;
-            padding: 50px;
-            background-color: #CCFFCC;
-        }
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
 
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-    </style>
+
+
 </head>
 <body>
 
+<h5>&nbsp;&nbsp;&nbsp;Welcome! &nbsp; <a th:href="@{/logout}"><b>[Logout]</b></a></h5>
+
 <div layout:fragment="content">
-    <div id="login">
-        <h4>
-            Hello,
-        </h4>
-        <img th:src="@{/images/smiley.png}" style="width:80px;height:80px;"/><br/>
-        <br/>
 
-
-        <h5> Select the domain you are interested to be tested:</h5><br/>
-
-        <form th:action="@{/quiz}" method="post">
-            <div class="radio" th:each="q : ${quizzes}">
-                <label><input type="radio" name="quiz" th:value="${q.getId()}" th:text="${q.getName()}"/></label>
-            </div>
-            <input type="submit" value="Begin Quiz"/>
-        </form>
-
-        <div th:each="result : ${resolved}">
-            <span th:text="${#dates.format(result.date, 'dd/MMM/yyyy-HH:mm')}"></span>: <span th:text="${result.quiz.name}"></span> - <span th:text="${result.score +'%'}"></span>
+<div class="col-sm-8 text-left">
+    <h3>Select the programming language:</h3>
+    <form th:action="@{/quiz}" method="post" role="form">
+        <div class="radio" th:each="q : ${quizzes}">
+            <label><input type="radio" name="quiz" th:value="${q.getId()}" th:text="${q.getName()}"/> </label>
         </div>
-    </div>
-</div>
+        <input type="submit" value="Begin Quiz"/>
 
+
+    </form>
+</div>
+    </div>
 </body>
-</html>  
+</html>
