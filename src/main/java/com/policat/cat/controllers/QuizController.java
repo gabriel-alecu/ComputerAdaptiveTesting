@@ -66,7 +66,7 @@ public class QuizController {
     @RequestMapping(value="/question", method = RequestMethod.GET)
     public String displayChoice(@ModelAttribute("ongoingQuiz") OngoingQuiz ongoingQuiz, SessionStatus sessionStatus) {
         //if you get on this page directly, without starting a quiz first
-        if(ongoingQuiz.getQuiz() == null) {
+        if(ongoingQuiz.getQuiz() == null || ongoingQuiz.getCompleted()) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
         }
@@ -89,7 +89,7 @@ public class QuizController {
 
     @RequestMapping(value="/question", method = RequestMethod.POST)
     public String processChoice(@ModelAttribute("ongoingQuiz") OngoingQuiz ongoingQuiz, SessionStatus sessionStatus) {
-        if(ongoingQuiz.getQuiz() == null) {
+        if(ongoingQuiz.getQuiz() == null || ongoingQuiz.getCompleted()) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
         }
