@@ -59,6 +59,10 @@
                 height: auto;
             }
         }
+
+        .logo_link:hover, .logo_link:active {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -105,16 +109,16 @@
 </nav>-->
 
 <div class="container-fluid">
-    <div class="jumbotron">
+    <a th:href="@{/}" class="logo_link">"<div class="jumbotron">
         <h1>&nbsp;&nbsp;Computer Adaptive Testing </h1>
-    </div>
+    </div></a>
     <div sec:authorize="isAuthenticated()">
     <h5>&nbsp;&nbsp;&nbsp;Welcome <span sec:authentication="name">User</span>! &nbsp; <a th:href="@{/logout}"><b>[Logout]</b></a></h5>
     </div>
 
     <div class="col-sm-2 sidenav">
 
-        <div class="panel-heading">
+        <!--<div class="panel-heading">
             <h4 class="panel-title"><a data-toggle="collapse" href="#collapse1">Main Menu&nbsp;<span class="caret"></span></a></h4>
         </div>
         <div id="collapse1" class="panel-collapse collapse">
@@ -126,6 +130,10 @@
                     <li class="list-group-item">About</li>
                 </a>
             </ul>
+        </div>-->
+
+        <div class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/}">Home</a></h4>
         </div>
 
         <div class="panel-heading">
@@ -151,6 +159,9 @@
 
         <hr/>
         <br/>
+        <div class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/about}">About</a></h4>
+        </div>
         <div class="panel-heading">
             <h4 class="panel-title"><a th:href="@{/contact}">Contact</a></h4>
         </div>
