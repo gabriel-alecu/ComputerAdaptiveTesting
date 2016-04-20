@@ -27,7 +27,7 @@
             FB.init({
                 appId      : '236976676635446',
                 xfbml      : true,
-                version    : 'v2.5'
+                version    : 'v1.0'
             });
         };
 
@@ -35,9 +35,8 @@
             FB.ui({
                 method: 'feed',
                 link: 'https://policat.herokuapp.com',
-                caption: "I just completed a "+domain+" quiz from PoliCAT!",
-                description: "And I got a score of: "+score+"%",
-                picture: '/images/knowledge.jpg'
+                name: "I just completed a "+domain+" quiz from PoliCAT!",
+                description: "And I got a score of: "+score+"%"
             }, function(response){});
         }
 
