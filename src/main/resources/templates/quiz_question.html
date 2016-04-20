@@ -42,16 +42,19 @@
             };
         }
 
+        function updateTimer(clock, endtime){
+            var t = getTimeRemaining(endtime);
+            clock.innerHTML = t.minutes + ' min' +  ' ' +
+                    t.seconds + ' sec ';
+            if(t.total<=0){
+                clearInterval(timeinterval);
+            }
+        }
+
         function initializeClock(id, endtime){
             var clock = document.getElementById(id);
-            var timeinterval = setInterval(function(){
-                var t = getTimeRemaining(endtime);
-                clock.innerHTML = t.minutes + ' min' +  ' ' +
-                        t.seconds + ' sec ';
-                if(t.total<=0){
-                    clearInterval(timeinterval);
-                }
-            },1000);
+            var timeinterval = setInterval(function(){updateTimer(clock, endtime);},1000);
+            updateTimer(clock, endtime);
         }
         /*]]>*/
     </script>
