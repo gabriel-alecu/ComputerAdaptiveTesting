@@ -1,1 +1,1 @@
-web: java -jar $JAVA_OPTS -Dserver.port=$PORT build/libs/cat-0.5.0-SNAPSHOT.jar
+web: java -jar $JAVA_OPTS -Dserver.port=$PORT -Dspring.datasource.url=$DB_URL -Dspring.datasource.username=$DB_USER -Dspring.datasource.password=$DB_PASS build/libs/cat-0.5.0-SNAPSHOT.jar
