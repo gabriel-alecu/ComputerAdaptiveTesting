@@ -29,12 +29,6 @@ repositories {
 	mavenCentral()
 }
 
-test {
-    systemProperty('spring.datasource.url', System.getenv('DB_URL'))
-    systemProperty('spring.datasource.username', System.getenv('DB_USER'))
-    systemProperty('spring.datasource.password', System.getenv('DB_PASS'))
-}
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
@@ -44,6 +38,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testRuntime('com.h2database:h2')
 }
 
 
