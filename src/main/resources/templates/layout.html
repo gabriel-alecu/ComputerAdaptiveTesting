@@ -152,6 +152,10 @@
         </div>
 
         <div sec:authorize="hasAuthority('ADMIN')" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/admin}">Admin Panel</a></h4>
+        </div>
+
+        <div sec:authorize="hasAuthority('ADMIN')" class="panel-heading">
             <h4 class="panel-title"><a th:href="@{/addQ}">Add Questions into Database</a></h4>
         </div>
 
