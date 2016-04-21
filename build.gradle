@@ -29,7 +29,11 @@ repositories {
 	mavenCentral()
 }
 
-test.systemProperties = System.properties
+test {
+    systemProperty('spring.datasource.url', System.getenv('DB_URL'))
+    systemProperty('spring.datasource.username', System.getenv('DB_USER'))
+    systemProperty('spring.datasource.password', System.getenv('DB_PASS'))
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
