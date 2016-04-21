@@ -11,7 +11,8 @@
 <div layout:fragment="content">
     <br/>
     <h3>Registration completed successfully!</h3>
-    <h5>You may now go to login page.</h5><hr/>
+
+    <a th:href="@{/login}" class="btn btn-info" role="button">Login</a><hr/>
     <p><a th:href="@{/index}">Click here to go back to the main page</a></p>
 </div>
 
