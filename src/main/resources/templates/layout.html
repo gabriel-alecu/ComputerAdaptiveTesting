@@ -143,21 +143,28 @@
             <h4 class="panel-title"><a th:href="@{/quiz}">Quiz</a></h4>
         </div>
 
-        <div sec:authorize="isAuthenticated()" class="panel-heading">
-            <h4 class="panel-title"><a th:href="@{/logout}">Logout</a></h4>
-        </div>
-
         <div sec:authorize="isAnonymous()" class="panel-heading">
             <h4 class="panel-title"><a th:href="@{/login}">Login</a></h4>
         </div>
-
 
         <div sec:authorize="isAnonymous()" class="panel-heading">
             <h4 class="panel-title"><a th:href="@{/register}">Register</a></h4>
         </div>
 
         <div sec:authorize="hasAuthority('ADMIN')" class="panel-heading">
-            <h4 class="panel-title"><a th:href="@{/admin}">Admin Panel</a></h4>
+            <h4 class="panel-title"><a th:href="@{/addQ}">Add Questions into Database</a></h4>
+        </div>
+
+        <div sec:authorize="hasAuthority('ADMIN')" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/addAdm}">Add another admin</a></h4>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/changePass}">Change your account password</a></h4>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/logout}">Logout</a></h4>
         </div>
 
         <hr/>
