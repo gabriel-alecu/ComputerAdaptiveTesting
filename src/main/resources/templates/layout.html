@@ -27,11 +27,8 @@
         .sidenav {
             padding-top: 20px;
             background-color: lightgrey;
-
-            bottom:0;
-
+            padding-bottom: 10px;
         }
-
 
         /* Set black background color, white text and some padding */
         footer {
@@ -63,47 +60,6 @@
 
 </head>
 <body>
-
-<!--<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Computer Adaptive Testing</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/'}?'active' : ''">
-                    <a th:href="@{/}">Home</a>
-                </li>
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/'}?'active' : ''">
-                    <a th:href="@{/}">About</a>
-                </li>
-                <li sec:authorize="isAuthenticated()" th:classappend="${#httpServletRequest.getRequestURI() == '/quiz'}?'active' : ''">
-                    <a th:href="@{/quiz}">Quiz</a>
-                </li>
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAuthenticated()" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span sec:authentication="name">User</span><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{/logout}">Logout</a></li>
-                    </ul>
-                </li>
-                <li sec:authorize="isAnonymous()" th:classappend="${#httpServletRequest.getRequestURI() == '/login'}?'active' : ''">
-                    <a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                </li>
-                <li sec:authorize="isAnonymous()" th:classappend="${#httpServletRequest.getRequestURI() == '/register'}?'active' : ''">
-                    <a th:href="@{/register}"><span class="glyphicon glyphicon-edit"></span> Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>-->
 
 <div class="container-fluid">
     <a th:href="@{/}" class="logo_link"><div class="jumbotron">
