@@ -15,14 +15,17 @@ import java.util.*;
 
 @Service
 public class QuizService {
-    public static final int MAX_TIME = 30;  //minutes
-
-    public static final int MAX_QUESTIONS = 30;
-    public static final int MAX_SAME_SCORE = 3;
-    public static final int MAX_CONSECUTIVE_WRONG = 5;
-
     public static final int MAX_QUESTION_SCORE = 5;
     public static final int MIN_QUESTION_SCORE = 1;
+
+    public static final int MIN_QUESTIONS = 5;
+    public static final int MAX_QUESTIONS = 25;
+
+
+    public static final int MAX_TIME = 30;  //minutes
+
+    public static final int MAX_SAME_SCORE = 3;
+    public static final int MAX_CONSECUTIVE_WRONG = 5;
 
 
     @Autowired
@@ -54,63 +57,123 @@ public class QuizService {
         return getQuestionAnswers(chosen);
     }
 
+    public QuestionResponse getPreviousResponse(OngoingQuiz ongoingQuiz) {
+        List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
+        return responses.get(responses.size()-1);
+    }
+
+    public List<QuestionResponse> getCorrectResponses(OngoingQuiz ongoingQuiz) {
+        List<QuestionResponse> correctResponses = new ArrayList<>();
+        List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
+        for(QuestionResponse response : responses) {
+            if(isCorrect(response)) {
+                correctResponses.add(response);
+            }
+        }
+        return correctResponses;
+    }
+
+    public Double calcMean(OngoingQuiz ongoingQuiz) {
+        Integer sumScores = 0;
+        List<QuestionResponse> correctResponses = getCorrectResponses(ongoingQuiz);
+        for(QuestionResponse response : correctResponses) {
+            sumScores += response.getQuestion().getScore();
+        }
+        return sumScores/(double)correctResponses.size();
+    }
+
+    public Double calcError(OngoingQuiz ongoingQuiz) {
+        //Standard deviation
+        Double mean = calcMean(ongoingQuiz);
+        Double devSum = 0.0;
+        List<QuestionResponse> correctResponses = getCorrectResponses(ongoingQuiz);
+        for(QuestionResponse response : correctResponses) {
+            Integer questionScore = response.getQuestion().getScore();
+            devSum += Math.pow((questionScore - mean), 2);
+        }
+        Double stdDev = Math.sqrt(devSum/correctResponses.size());
+
+        //Standard error
+        return stdDev/Math.sqrt(correctResponses.size());
+    }
+
     public Question chooseNextQuestion(OngoingQuiz ongoingQuiz) {
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-        if(ongoingQuiz.getEndTime().before(now)) {
+        if (ongoingQuiz.getQuestionsResponses().isEmpty()) {
+            return getQuestionWithScore(5, ongoingQuiz);
+        } else if (ongoingQuiz.getQuestionsResponses().size() >= MAX_QUESTIONS) {
             return null;
         }
 
-        switch(ongoingQuiz.getQuestionsResponses().size()) {
-            case MAX_QUESTIONS:
-                return null;
-            case 0:
-                return getQuestionWithScore(5, ongoingQuiz);
-            default:
-                List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
+        if (ongoingQuiz.getQuestionsResponses().size() > MIN_QUESTIONS && calcError(ongoingQuiz) < .4) {
+            return null;
+        }
 
-                Integer numSameScore = 0;
-                Integer numWrong = 0;
-                Integer lastCorrectScore = null;
-                Boolean prevWasWrong = true;
-                for(int i=responses.size()-1; i>=0; i--) {
-                    QuestionResponse response = responses.get(i);
-                    if(isCorect(response)) {
-                        prevWasWrong = false;
-                        if(lastCorrectScore == null) {
-                            lastCorrectScore = response.getQuestion().getScore();
-                        } else {
-                            if(response.getQuestion().getScore() == lastCorrectScore) {
-                                numSameScore++;
-                                if(numSameScore >= MAX_SAME_SCORE) {
+        QuestionResponse lastResponse = getPreviousResponse(ongoingQuiz);
+        Integer nextQuestionScore;
+        if (isCorrect(lastResponse)) {
+            nextQuestionScore = Math.min(lastResponse.getQuestion().getScore() + 1, MAX_QUESTION_SCORE);
+        } else {
+            nextQuestionScore = Math.max(lastResponse.getQuestion().getScore() - 1, MIN_QUESTION_SCORE);
+        }
+        return getQuestionWithScore(nextQuestionScore, ongoingQuiz);
+    }
+        /*Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        if(ongoingQuiz.getEndTime().before(now)) {
+            return null;
+        }*/
+
+              /*  switch(ongoingQuiz.getQuestionsResponses().size()) {
+                    case MAX_QUESTIONS:
+                        return null;
+                    case 0:
+                        return getQuestionWithScore(5, ongoingQuiz);
+                    default:
+                        List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
+
+                        Integer numSameScore = 0;
+                        Integer numWrong = 0;
+                        Integer lastCorrectScore = null;
+                        Boolean prevWasWrong = true;
+                        for(int i=responses.size()-1; i>=0; i--) {
+                            QuestionResponse response = responses.get(i);
+                            if(isCorect(response)) {
+                                prevWasWrong = false;
+                                if(lastCorrectScore == null) {
+                                    lastCorrectScore = response.getQuestion().getScore();
+                                } else {
+                                    if(response.getQuestion().getScore() == lastCorrectScore) {
+                                        numSameScore++;
+                                        if(numSameScore >= MAX_SAME_SCORE) {
+                                            break;
+                                        }
+                                    } else {
+                                        break;
+                                    }
+                                }
+                            } else if(prevWasWrong) {
+                                numWrong++;
+                                if(numWrong >= MAX_CONSECUTIVE_WRONG) {
                                     break;
                                 }
-                            } else {
-                                break;
                             }
                         }
-                    } else if(prevWasWrong) {
-                        numWrong++;
-                        if(numWrong >= MAX_CONSECUTIVE_WRONG) {
-                            break;
+                        if(numSameScore >= MAX_SAME_SCORE || numWrong >= MAX_CONSECUTIVE_WRONG) {
+                            return null;
                         }
-                    }
-                }
-                if(numSameScore >= MAX_SAME_SCORE || numWrong >= MAX_CONSECUTIVE_WRONG) {
-                    return null;
-                }
 
 
-                QuestionResponse lastResponse = responses.get(responses.size()-1);
-                Integer nextQuestionScore;
-                if (isCorect(lastResponse)) {
-                    nextQuestionScore = Math.min(lastResponse.getQuestion().getScore() + 1, MAX_QUESTION_SCORE);
-                } else {
-                    nextQuestionScore = Math.max(lastResponse.getQuestion().getScore() - 1, MIN_QUESTION_SCORE);
+                        QuestionResponse lastResponse = responses.get(responses.size()-1);
+                        Integer nextQuestionScore;
+                        if (isCorect(lastResponse)) {
+                            nextQuestionScore = Math.min(lastResponse.getQuestion().getScore() + 1, MAX_QUESTION_SCORE);
+                        } else {
+                            nextQuestionScore = Math.max(lastResponse.getQuestion().getScore() - 1, MIN_QUESTION_SCORE);
+                        }
+                        return getQuestionWithScore(nextQuestionScore, ongoingQuiz);
                 }
-                return getQuestionWithScore(nextQuestionScore, ongoingQuiz);
-        }
-    }
+            }
+        }*/
 
     public Quiz getQuizWithQuestions(Long quizId) {
         Quiz quiz = quizRepository.findOne(quizId);
@@ -134,30 +197,15 @@ public class QuizService {
         return correctAnswers;
     }
 
-    public Boolean isCorect(QuestionResponse questionResponse) {
+    public Boolean isCorrect(QuestionResponse questionResponse) {
         Set<Answer> correctAnswers = getCorrectAnswers(questionResponse.getQuestion());
         Set<Answer> userAnswers = questionResponse.getSelectedAnswers();
         return correctAnswers.equals(userAnswers);
     }
 
     public Integer calcFinalScore(OngoingQuiz ongoingQuiz) {
-        List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
-        Integer totalScore = 0;
-        Integer totalPossibleScore = 0;
-        for(QuestionResponse response : responses) {
-            totalPossibleScore += response.getQuestion().getScore();
-            if(isCorect(response)) {
-                totalScore += response.getQuestion().getScore();
-            }
-        }
-
-        Integer finalScore;
-        if(totalPossibleScore.equals(0)) {
-            finalScore = 0;
-        } else {
-            finalScore = totalScore*100/totalPossibleScore;
-        }
-        return finalScore;
+        Double mean = calcMean(ongoingQuiz);
+        return (int)(100*mean/MAX_QUESTION_SCORE);
     }
 
     public void debugLastResponse(OngoingQuiz ongoingQuiz) {
@@ -184,6 +232,6 @@ public class QuizService {
         System.out.println();
 
         System.out.print("Is Correct: ");
-        System.out.println(isCorect(lastResponse));
+        System.out.println(isCorrect(lastResponse));
     }
 }
