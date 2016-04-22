@@ -16,7 +16,7 @@
 
         <div >
             <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
-               <div th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
+               <div class="option" th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
                  <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
                   <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${answer.text}">Answer</label>
               </div>
@@ -32,6 +32,7 @@
 <section layout:fragment="scripts" >
     <script>
         /*<![CDATA[*/
+
         function getTimeRemaining(endtime){
             var t = new Date(endtime) - new Date();
             return Math.floor(t/1000);
@@ -52,6 +53,20 @@
             var timeinterval = setInterval(function(){updateTimer(clock, endtime, formId, timeinterval);},1000);
             updateTimer(clock, endtime, formId, timeinterval);
         }
+
+
+        function validateCheckboxes(checkboxes, first) {
+            first.setCustomValidity(checkboxes.find('input:checked').length === 0 ? 'You must choose at least 1 option' : '');
+        }
+
+        var checkboxes = $('.option');
+        var inputs = checkboxes.find('input');
+        var first = inputs[0];
+        inputs.on('change', function () {
+            validateCheckboxes(checkboxes, first);
+        });
+        validateCheckboxes(checkboxes, first);
+
         /*]]>*/
     </script>
 
@@ -62,7 +77,6 @@
             initializeClock('clockdiv', quizEnd, 'questionForm');
         }
         window.onload = init;
-
         /*]]>*/
     </script>
 </section>
