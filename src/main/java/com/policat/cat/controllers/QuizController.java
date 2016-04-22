@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,19 +102,28 @@ public class QuizController {
             return "redirect:/quiz/result";
         }
 
+
         Set<Answer> selectedAnswers = new HashSet<>();
-        for(Long chosenId : ongoingQuiz.getCurrentSelectedAnswers()) {
-            for(Answer answer : ongoingQuiz.getCurrentQuestion().getAnswers()) {
-                if(answer.getId().equals(chosenId)) {
-                    selectedAnswers.add(answer);
-                    break;
+
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        //If time limit was reached, we don't take in account the answers
+        if(ongoingQuiz.getQuestionTimeLimit().before(now)) {
+            for (Long chosenId : ongoingQuiz.getCurrentSelectedAnswers()) {
+                for (Answer answer : ongoingQuiz.getCurrentQuestion().getAnswers()) {
+                    if (answer.getId().equals(chosenId)) {
+                        selectedAnswers.add(answer);
+                        break;
+                    }
                 }
             }
         }
+
         QuestionResponse questionResponse = new QuestionResponse(ongoingQuiz.getCurrentQuestion(), selectedAnswers);
         ongoingQuiz.addQuestionResponse(questionResponse);
 
         quizService.debugLastResponse(ongoingQuiz);
+
 
         //prepare to choose a new question
         ongoingQuiz.setCurrentQuestion(null);

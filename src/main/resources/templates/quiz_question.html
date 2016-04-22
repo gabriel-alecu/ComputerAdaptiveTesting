@@ -15,7 +15,7 @@
         <h3><b><div th:text="${ongoingQuiz.getCurrentQuestion().getText()}"></div></b></h3><hr/>
 
         <div >
-            <form th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
+            <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
                <div th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
                  <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
                   <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${answer.text}">Answer</label>
@@ -34,37 +34,32 @@
         /*<![CDATA[*/
         function getTimeRemaining(endtime){
             var t = new Date(endtime) - new Date();
-            var seconds = Math.floor( (t/1000) % 60 );
-            var minutes = Math.floor( (t/1000/60) % 60 );
-            return {
-                'total': t,
-                'minutes': minutes,
-                'seconds': seconds
-            };
+            return Math.floor(t/1000);
         }
 
-        function updateTimer(clock, endtime){
+        function updateTimer(clock, endtime, formId, timeinterval){
             var t = getTimeRemaining(endtime);
-            clock.innerHTML = t.minutes + ' min' +  ' ' +
-                    t.seconds + ' sec ';
-            if(t.total<=0){
+            clock.innerHTML = t + ' sec ';
+            if(t<=0){
                 clearInterval(timeinterval);
+                alert("Response time expired");
+                document.getElementById(formId).submit();
             }
         }
 
-        function initializeClock(id, endtime){
+        function initializeClock(id, endtime, formId){
             var clock = document.getElementById(id);
-            var timeinterval = setInterval(function(){updateTimer(clock, endtime);},1000);
-            updateTimer(clock, endtime);
+            var timeinterval = setInterval(function(){updateTimer(clock, endtime, formId, timeinterval);},1000);
+            updateTimer(clock, endtime, formId, timeinterval);
         }
         /*]]>*/
     </script>
 
     <script th:inline="javascript">
         /*<![CDATA[*/
-        var quizEnd = /*[[${ongoingQuiz.endTime.getTime()}]]*/ '0';
+        var quizEnd = /*[[${ongoingQuiz.questionTimeLimit.getTime()}]]*/ '0';
         function init() {
-            initializeClock('clockdiv', quizEnd);
+            initializeClock('clockdiv', quizEnd, 'questionForm');
         }
         window.onload = init;
 

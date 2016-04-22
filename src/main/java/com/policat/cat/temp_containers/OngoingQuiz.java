@@ -13,25 +13,14 @@ import java.util.Date;
 @Component
 @Scope("session")
 public class OngoingQuiz {
-    private Date endTime;
     private Quiz quiz;
     private Question currentQuestion;
     private ArrayList<Long> currentSelectedAnswers = new ArrayList<>();
+    private Date questionTimeLimit;
     private Boolean completed = false;
     private ArrayList<QuestionResponse> questionsResponses = new ArrayList<>();
 
     public OngoingQuiz() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, QuizService.MAX_TIME);
-        this.endTime = calendar.getTime();
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
     public Quiz getQuiz() {
@@ -49,6 +38,30 @@ public class OngoingQuiz {
     public void setCurrentQuestion(Question currentQuestion) {
         this.currentQuestion = currentQuestion;
         this.currentSelectedAnswers = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, QuizService.MAX_QUESTION_TIME);
+        this.questionTimeLimit = calendar.getTime();
+    }
+
+    public ArrayList<Long> getCurrentSelectedAnswers() {
+        //workaround for null when no answers are selected
+        if(this.currentSelectedAnswers == null) {
+            this.currentSelectedAnswers = new ArrayList<>();
+        }
+        return this.currentSelectedAnswers;
+    }
+
+    public void setCurrentSelectedAnswers(ArrayList<Long> currentSelectedAnswers) {
+        this.currentSelectedAnswers = currentSelectedAnswers;
+    }
+
+    public Date getQuestionTimeLimit() {
+        return questionTimeLimit;
+    }
+
+    public void setQuestionTimeLimit(Date questionTimeLimit) {
+        this.questionTimeLimit = questionTimeLimit;
     }
 
     public Boolean getCompleted() {
@@ -69,17 +82,5 @@ public class OngoingQuiz {
 
     public void addQuestionResponse(QuestionResponse questionResponse) {
         this.questionsResponses.add(questionResponse);
-    }
-
-    public ArrayList<Long> getCurrentSelectedAnswers() {
-        //workaround for null when no answers are selected
-        if(this.currentSelectedAnswers == null) {
-            this.currentSelectedAnswers = new ArrayList<>();
-        }
-        return this.currentSelectedAnswers;
-    }
-
-    public void setCurrentSelectedAnswers(ArrayList<Long> currentSelectedAnswers) {
-        this.currentSelectedAnswers = currentSelectedAnswers;
     }
 }
