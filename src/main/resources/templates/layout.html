@@ -22,23 +22,16 @@
             color: white;
         }
 
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {
-            height: 450px
-        }
 
         /* Set blue background color and 100% height */
         .sidenav {
             padding-top: 20px;
             background-color: lightgrey;
-            height: 800px;
+
+            bottom:0;
+
         }
+
 
         /* Set black background color, white text and some padding */
         footer {
@@ -67,6 +60,7 @@
             padding-top: 4px;
         }
     </style>
+
 </head>
 <body>
 
@@ -185,6 +179,12 @@
         <div class="panel-heading">
             <h4 class="panel-title"><a href="https://github.com/gabe-alex/ComputerAdaptiveTesting">GitHub</a></h4>
         </div>
+    <hr/>
+        <div class="panel-heading">
+            <h4 class="panel-title"><a th:href="@{/tutorial}">Tutorials</a></h4>
+        </div>
+
+
     </div>
 
 
