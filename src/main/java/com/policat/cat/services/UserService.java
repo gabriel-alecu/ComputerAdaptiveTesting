@@ -33,8 +33,12 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public User findUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public AuthedUser findAndAuthenticateUser(String username, String providedPassword) {
-        User user = userRepository.findByUsername(username);
+        User user = findUser(username);
         if (user == null) {
             return null;
         }
@@ -47,6 +51,10 @@ public class UserService implements UserDetailsService {
     }
 
     public User registerUserAccount(UserRegistrationDTO userRegistrationDTO) {
+        if(findUser(userRegistrationDTO.getUsername()) != null) {
+            return null;
+        }
+
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         return create(user, userRegistrationDTO.getPassword());

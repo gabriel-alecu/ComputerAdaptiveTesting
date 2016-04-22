@@ -1,5 +1,6 @@
 package com.policat.cat.controllers;
 
+import com.policat.cat.entities.User;
 import com.policat.cat.temp_containers.UserRegistrationDTO;
 import com.policat.cat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,10 @@ public class RegistrationController {
     @RequestMapping(method=RequestMethod.POST)
     public String checkPersonInfo(@Valid UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            userService.registerUserAccount(userRegistrationDTO);
+            User newUser = userService.registerUserAccount(userRegistrationDTO);
+            if (newUser == null) {
+                bindingResult.rejectValue("username", "message.regError");
+            }
         }
 
         if (bindingResult.hasErrors()) {
