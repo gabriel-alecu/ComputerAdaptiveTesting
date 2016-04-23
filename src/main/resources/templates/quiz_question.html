@@ -34,13 +34,13 @@
     <script>
         /*<![CDATA[*/
 
-        function getTimeRemaining(endtime){
-            var t = new Date(endtime) - new Date();
+        function getTimeRemaining(endDate){
+            var t = endDate - new Date();
             return Math.floor(t/1000);
         }
 
-        function updateTimer(clock, endtime, formId, timeinterval){
-            var t = getTimeRemaining(endtime);
+        function updateTimer(clock, endDate, formId, timeinterval){
+            var t = getTimeRemaining(endDate);
             clock.innerHTML = t + ' sec ';
             if(t<=0){
                 clearInterval(timeinterval);
@@ -49,10 +49,12 @@
             }
         }
 
-        function initializeClock(id, endtime, formId){
+        function initializeClock(id, timeLimit, formId){
             var clock = document.getElementById(id);
-            var timeinterval = setInterval(function(){updateTimer(clock, endtime, formId, timeinterval);},1000);
-            updateTimer(clock, endtime, formId, timeinterval);
+            var endDate = new Date();
+            endDate.setTime(endDate.getTime() + timeLimit*1000);
+            var timeinterval = setInterval(function(){updateTimer(clock, endDate, formId, timeinterval);},1000);
+            updateTimer(clock, endDate, formId, timeinterval);
         }
 
 
@@ -68,16 +70,12 @@
         });
         validateCheckboxes(checkboxes, first);
 
-        /*]]>*/
-    </script>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var quizEnd = /*[[${ongoingQuiz.questionTimeLimit.getTime()}]]*/ '0';
         function init() {
-            initializeClock('clockdiv', quizEnd, 'questionForm');
+            initializeClock('clockdiv', 60, 'questionForm');
         }
         window.onload = init;
+
         /*]]>*/
     </script>
 </section>
