@@ -2,7 +2,9 @@ package com.policat.cat.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Question {
@@ -73,5 +75,16 @@ public class Question {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    @Transient
+    public Set<Answer> getCorrectAnswers() {
+        Set<Answer> correctAnswers = new HashSet<>();
+        for(Answer answer : answers) {
+            if(answer.getCorrect()) {
+                correctAnswers.add(answer);
+            }
+        }
+        return correctAnswers;
     }
 }

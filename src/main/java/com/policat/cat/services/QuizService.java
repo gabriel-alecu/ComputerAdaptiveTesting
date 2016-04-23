@@ -42,23 +42,6 @@ public class QuizService {
         return question;
     }
 
-    public Set<Answer> getCorrectAnswers(Question question) {
-        Set<Answer> correctAnswers = new HashSet<>();
-        for(Answer answer : question.getAnswers()) {
-            if(answer.getCorrect()) {
-                correctAnswers.add(answer);
-            }
-        }
-        return correctAnswers;
-    }
-
-    public Boolean isCorrect(QuestionResponse questionResponse) {
-        Set<Answer> correctAnswers = getCorrectAnswers(questionResponse.getQuestion());
-        Set<Answer> userAnswers = questionResponse.getSelectedAnswers();
-        return correctAnswers.equals(userAnswers);
-    }
-
-
     public QuestionResponse getPreviousResponse(OngoingQuiz ongoingQuiz) {
         List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
         return responses.get(responses.size()-1);
@@ -90,7 +73,7 @@ public class QuizService {
         List<QuestionResponse> correctResponses = new ArrayList<>();
         List<QuestionResponse> responses = ongoingQuiz.getQuestionsResponses();
         for(QuestionResponse response : responses) {
-            if(isCorrect(response)) {
+            if(response.isCorrect()) {
                 correctResponses.add(response);
             }
         }
@@ -100,9 +83,15 @@ public class QuizService {
     public Double calcMean(OngoingQuiz ongoingQuiz) {
         Integer sumScores = 0;
         List<QuestionResponse> correctResponses = getCorrectResponses(ongoingQuiz);
+
+        if(correctResponses.size() == 0) {
+            return 0.0;
+        }
+
         for(QuestionResponse response : correctResponses) {
             sumScores += response.getQuestion().getScore();
         }
+
         return sumScores/(double)correctResponses.size();
     }
 
@@ -111,6 +100,11 @@ public class QuizService {
         Double mean = calcMean(ongoingQuiz);
         Double devSum = 0.0;
         List<QuestionResponse> correctResponses = getCorrectResponses(ongoingQuiz);
+
+        if(correctResponses.size() == 0) {
+            return 0.0;
+        }
+
         for(QuestionResponse response : correctResponses) {
             Integer questionScore = response.getQuestion().getScore();
             devSum += Math.pow((questionScore - mean), 2);
@@ -134,7 +128,7 @@ public class QuizService {
 
         QuestionResponse lastResponse = getPreviousResponse(ongoingQuiz);
         Integer nextQuestionScore;
-        if (isCorrect(lastResponse)) {
+        if (lastResponse.isCorrect()) {
             nextQuestionScore = Math.min(lastResponse.getQuestion().getScore() + 1, MAX_QUESTION_SCORE);
         } else {
             nextQuestionScore = Math.max(lastResponse.getQuestion().getScore() - 1, MIN_QUESTION_SCORE);
@@ -157,7 +151,7 @@ public class QuizService {
         System.out.println(lastResponse.getQuestion().getScore());
 
         System.out.print("Corect Answers IDs:");
-        for(Answer answer : getCorrectAnswers(lastResponse.getQuestion())) {
+        for(Answer answer : lastResponse.getQuestion().getCorrectAnswers()) {
             System.out.print(" ");
             System.out.print(answer.getId());
         }
@@ -171,6 +165,6 @@ public class QuizService {
         System.out.println();
 
         System.out.print("Is Correct: ");
-        System.out.println(isCorrect(lastResponse));
+        System.out.println(lastResponse.isCorrect());
     }
 }

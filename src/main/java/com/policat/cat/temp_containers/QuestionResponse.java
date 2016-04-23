@@ -25,4 +25,10 @@ public class QuestionResponse {
     public Set<Answer> getSelectedAnswers() {
         return selectedAnswers;
     }
+
+    public Boolean isCorrect() {
+        Set<Answer> correctAnswers = this.question.getCorrectAnswers();
+        Set<Answer> userAnswers = this.selectedAnswers;
+        return correctAnswers.equals(userAnswers);
+    }
 }

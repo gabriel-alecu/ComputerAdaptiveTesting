@@ -5,6 +5,23 @@
       layout:decorator="layout">
 <head>
     <title>Quiz Result</title>
+
+    <style>
+        .panel li {
+            list-style: none;
+        }
+
+        .glyphicon-ok {
+            color: #3c763d;
+        }
+        .glyphicon-remove {
+            color: #a94442;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,15 +30,35 @@
         <h1>Result</h1>
     </div>
 
-    <br/>
-    <h3>Quiz completed successfully!</h3>
-    <h4>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h4><hr/>
+    <h2>Quiz completed successfully!</h2>
+    <h3>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h3>
     <!--<p><a th:href="@{/index}">Click here to go back to the main page</a></p>-->
     <div align="center">
         <a th:href="'javascript:share(' + ${quizResult.score} + ',\'' + ${quizResult.quiz.name} + '\');'">
             <img th:src="@{/images/fb_share_button.png}" alt="Share on Facebook"/>
         </a>
-       <h2 style="text-align: center">Feedback Form</h2>
+    </div>
+
+    <hr/>
+
+    <h3>Results per question:</h3>
+    <div th:each="response : ${ongoingQuiz.questionsResponses}" class="panel" th:classappend="${response.isCorrect()}?'panel-success' : 'panel-danger'">
+        <div class="panel-heading"><span th:text="${response.question.text}">Question</span><span class="pull-right" th:text="${'Difficulty: '+response.question.score + '/5'}">Score</span></div>
+        <div class="panel-body">
+            <ul>
+                <li th:each="answer : ${response.question.answers}">
+                    <span th:if="${response.getSelectedAnswers().contains(answer) and response.question.getCorrectAnswers().contains(answer)}" class="glyphicon glyphicon-ok"></span>
+                    <span th:if="${response.getSelectedAnswers().contains(answer) and !response.question.getCorrectAnswers().contains(answer)}" class="glyphicon glyphicon-remove"></span>
+                    <span  th:classappend="${response.question.getCorrectAnswers().contains(answer)}?'text-bold' : ''" th:text="${answer.text}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div align="center">
+        <h2 style="text-align: center">Feedback Form</h2>
         <iframe src="https://docs.google.com/forms/d/1JWsaoGHBHaFwy6WgtyHyo2gmENw-MndYKpB1xRf5Rkg/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
     </div>
 </div>

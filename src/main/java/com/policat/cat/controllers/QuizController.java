@@ -108,7 +108,7 @@ public class QuizController {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
         //If time limit was reached, we don't take in account the answers
-        if(ongoingQuiz.getQuestionTimeLimit().before(now)) {
+        if(ongoingQuiz.getQuestionTimeLimit().after(now)) {
             for (Long chosenId : ongoingQuiz.getCurrentSelectedAnswers()) {
                 for (Answer answer : ongoingQuiz.getCurrentQuestion().getAnswers()) {
                     if (answer.getId().equals(chosenId)) {
