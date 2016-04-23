@@ -80,7 +80,7 @@
                 <li sec:authorize="isAuthenticated()" class="dropdown" th:classappend="${#httpServletRequest.getRequestURI() == '/changePass'}?'active' : ''">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">User</span><span class="caret"></span><span class="pull-right glyphicon glyphicon-user"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/changePass'}?'active' : ''"><a th:href="@{/changePass}">Change password</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/changepass'}?'active' : ''"><a th:href="@{/changepass}">Change password</a></li>
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>

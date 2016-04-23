@@ -1,6 +1,7 @@
 package com.policat.cat.services;
 
 import com.policat.cat.auth.AuthedUser;
+import com.policat.cat.temp_containers.PasswordChangeDTO;
 import com.policat.cat.temp_containers.UserRegistrationDTO;
 import com.policat.cat.entities.User;
 import com.policat.cat.repositories.UserRepository;
@@ -58,5 +59,15 @@ public class UserService implements UserDetailsService {
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         return create(user, userRegistrationDTO.getPassword());
+    }
+
+    public User changeUserPassword(PasswordChangeDTO passwordChangeDTO, User user) {
+        if (!passwordEncoder.matches(passwordChangeDTO.getOld_password(), user.getPassword())) {
+            return null;
+        }
+
+        user.setPassword(passwordEncoder.encode(passwordChangeDTO.getPassword()));
+        userRepository.save(user);
+        return user;
     }
 }

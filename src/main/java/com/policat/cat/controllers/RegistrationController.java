@@ -24,7 +24,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public String checkPersonInfo(@Valid UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult) {
+    public String registerUser(@Valid UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             User newUser = userService.registerUserAccount(userRegistrationDTO);
             if (newUser == null) {
@@ -36,11 +36,6 @@ public class RegistrationController {
             return "register";
         }
 
-        return "redirect:/register/success";
-    }
-
-    @RequestMapping(value="/success", method=RequestMethod.GET)
-    public String checkPersonInfo() {
         return "register_success";
     }
 }

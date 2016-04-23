@@ -2,26 +2,23 @@ package com.policat.cat.temp_containers;
 
 import com.policat.cat.validators.PasswordMatches;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @PasswordMatches
-public class UserRegistrationDTO implements PasswordCheckDTO {
-    @Size(min=2, max=30)
-    private String username;
-    
+public class PasswordChangeDTO implements PasswordCheckDTO {
+    private String old_password;
+
     @Size(min=6)
     private String password;
 
     private String password_confirm;
 
-
-    public String getUsername() {
-        return username;
+    public String getOld_password() {
+        return old_password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOld_password(String old_password) {
+        this.old_password = old_password;
     }
 
     @Override
