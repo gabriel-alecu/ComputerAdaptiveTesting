@@ -17,31 +17,32 @@
     </div>
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-    <section id="content">
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <h1>Hello stranger! :)</h1>
-            <div>
-                <input type="text" name="username" placeholder="Username" required="required" id="username" autofocus="true"/>
+        <section id="content">
+            <div th:if="${param.error}">
+                Invalid username and password.
             </div>
-            <div>
-                <input type="password" name="password" placeholder="Password" required="required" id="password"/>
+            <div th:if="${param.logout}">
+                You have been logged out.
             </div>
-            <div>
-                <input type="submit" value="Log in"/>
+            <form th:action="@{/login}" method="post">
+                <h1>Hello stranger! :)</h1>
+                <div>
+                    <input type="text" name="username" placeholder="Username" required="required" id="username"
+                           autofocus="true"/>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password" required="required" id="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Log in"/>
 
-                <a th:href="@{/register}">Register</a>
-            </div>
-        </form><!-- form -->
-        <!--<a th:href="@{/social/facebook/signin}">
-            <img style="margin-top: 10px;" src="images/facebookloginbutton.png"/><br/><br/></a>-->
-    </section>
-        </div>
+                    <a th:href="@{/register}">Register</a>
+                </div>
+            </form><!-- form -->
+            <!--<a th:href="@{/social/facebook/signin}">
+                <img style="margin-top: 10px;" src="images/facebookloginbutton.png"/><br/><br/></a>-->
+        </section>
+    </div>
     <div class="col-sm-4"></div>
 
 </div>

@@ -1,7 +1,6 @@
 package com.policat.cat.configs;
 
 import com.policat.cat.auth.AuthedUser;
-import com.policat.cat.entities.User;
 import com.policat.cat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/register/**", "/about","/contact","/tutorials","/css/**", "/images/**").permitAll()
+                .antMatchers("/", "/index", "/register/**", "/about", "/contact", "/tutorials", "/css/**", "/images/**").permitAll()
                 .antMatchers("/managedb/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()

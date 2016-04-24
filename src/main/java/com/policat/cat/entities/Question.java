@@ -35,7 +35,8 @@ public class Question {
     private List<Option> options = new ArrayList<>();
 
 
-    public Question() {}
+    public Question() {
+    }
 
     public Question(String text, Integer score, Domain domain) {
         this.text = text;
@@ -103,8 +104,8 @@ public class Question {
     @Transient
     public Set<Option> getCorrectOptions() {
         Set<Option> correctOptions = new HashSet<>();
-        for(Option option : options) {
-            if(option.getCorrect()) {
+        for (Option option : options) {
+            if (option.getCorrect()) {
                 correctOptions.add(option);
             }
         }

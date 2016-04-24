@@ -3,8 +3,6 @@ package com.policat.cat.entities;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,8 @@ public class Domain implements Serializable {
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
-    public Domain() {}
+    public Domain() {
+    }
 
     public Domain(String name) {
         this.name = name;

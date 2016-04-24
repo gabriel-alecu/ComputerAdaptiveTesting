@@ -2,16 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">PoliCAT</title>
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <meta property="og:title" content="PoliCAT - Computer Adaptive Testing" />
-    <meta property="og:description" content="Formative Assessment application with Social Media integration using Computer Adaptive Test techniques" />
-    <meta property="og:image" content="/images/knowledge.jpg" />
+    <meta property="og:title" content="PoliCAT - Computer Adaptive Testing"/>
+    <meta property="og:description"
+          content="Formative Assessment application with Social Media integration using Computer Adaptive Test techniques"/>
+    <meta property="og:image" content="/images/knowledge.jpg"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/sidebar.css"/>
@@ -60,7 +61,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-sidebar-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -71,31 +73,53 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/' || #httpServletRequest.getRequestURI() == '/index'}?'active' : ''"><a th:href="@{/}">Home<span class="pull-right glyphicon glyphicon-home"></span></a></li>
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/quiz'}?'active' : ''"><a th:href="@{/quiz}">Quiz<span class="pull-right glyphicon glyphicon-ok"></span></a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/' || #httpServletRequest.getRequestURI() == '/index'}?'active' : ''">
+                    <a th:href="@{/}">Home<span class="pull-right glyphicon glyphicon-home"></span></a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/quiz'}?'active' : ''"><a
+                        th:href="@{/quiz}">Quiz<span class="pull-right glyphicon glyphicon-ok"></span></a></li>
 
-                <li sec:authorize="isAnonymous()" th:classappend="${#httpServletRequest.getRequestURI() == '/login'}?'active' : ''"><a th:href="@{/login}">Log-in<span class="pull-right glyphicon glyphicon-log-in"></span></a></li>
-                <li sec:authorize="isAnonymous()" th:classappend="${#httpServletRequest.getRequestURI() == '/register'}?'active' : ''"><a th:href="@{/register}">Register<span class="pull-right glyphicon glyphicon-edit"></span></a></li>
+                <li sec:authorize="isAnonymous()"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/login'}?'active' : ''"><a
+                        th:href="@{/login}">Log-in<span class="pull-right glyphicon glyphicon-log-in"></span></a></li>
+                <li sec:authorize="isAnonymous()"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/register'}?'active' : ''"><a
+                        th:href="@{/register}">Register<span class="pull-right glyphicon glyphicon-edit"></span></a>
+                </li>
 
-                <li sec:authorize="isAuthenticated()" class="dropdown" th:classappend="${#httpServletRequest.getRequestURI() == '/changePass'}?'active' : ''">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">User</span><span class="caret"></span><span class="pull-right glyphicon glyphicon-user"></span></a>
+                <li sec:authorize="isAuthenticated()" class="dropdown"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/changePass'}?'active' : ''">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            sec:authentication="name">User</span><span class="caret"></span><span
+                            class="pull-right glyphicon glyphicon-user"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/changepass'}?'active' : ''"><a th:href="@{/changepass}">Change password</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/changepass'}?'active' : ''"><a
+                                th:href="@{/changepass}">Change password</a></li>
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
-                <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${#httpServletRequest.getRequestURI() == '/managedb'}?'active' : ''"><a th:href="@{/managedb}">Manage Database<span class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
+                <li sec:authorize="hasAuthority('ADMIN')"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/managedb'}?'active' : ''"><a
+                        th:href="@{/managedb}">Manage Database<span
+                        class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
 
-                <li><a href="https://docs.google.com/forms/d/1JWsaoGHBHaFwy6WgtyHyo2gmENw-MndYKpB1xRf5Rkg/viewform" target="_blank">Feedback<span class="pull-right glyphicon glyphicon-pencil"></span></a></li>
+                <li><a href="https://docs.google.com/forms/d/1JWsaoGHBHaFwy6WgtyHyo2gmENw-MndYKpB1xRf5Rkg/viewform"
+                       target="_blank">Feedback<span class="pull-right glyphicon glyphicon-pencil"></span></a></li>
 
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/tutorials'}?'active' : ''"><a th:href="@{/tutorials}">Tutorials<span class="pull-right glyphicon glyphicon-education"></span></a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/tutorials'}?'active' : ''"><a
+                        th:href="@{/tutorials}">Tutorials<span class="pull-right glyphicon glyphicon-education"></span></a>
+                </li>
 
-                <li class="dropdown" th:classappend="${#httpServletRequest.getRequestURI() == '/about' || #httpServletRequest.getRequestURI() == '/contact'}?'active' : ''">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site info<span class="caret"></span><span class="pull-right glyphicon glyphicon-info-sign"></span></a>
+                <li class="dropdown"
+                    th:classappend="${#httpServletRequest.getRequestURI() == '/about' || #httpServletRequest.getRequestURI() == '/contact'}?'active' : ''">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site info<span class="caret"></span><span
+                            class="pull-right glyphicon glyphicon-info-sign"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/about'}?'active' : ''"><a th:href="@{/about}">About</a></li>
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/contact'}?'active' : ''"><a th:href="@{/contact}">Contact</a></li>
-                        <li><a href="https://github.com/gabe-alex/ComputerAdaptiveTesting" target="_blank">GitHub</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/about'}?'active' : ''"><a
+                                th:href="@{/about}">About</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/contact'}?'active' : ''"><a
+                                th:href="@{/contact}">Contact</a></li>
+                        <li><a href="https://github.com/gabe-alex/ComputerAdaptiveTesting" target="_blank">GitHub</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -117,7 +141,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<section layout:fragment="scripts" >
+<section layout:fragment="scripts">
 </section>
 
 </body>

@@ -9,8 +9,9 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {
     }
+
     @Override
-    public boolean isValid(Object obj, ConstraintValidatorContext context){
+    public boolean isValid(Object obj, ConstraintValidatorContext context) {
         PasswordCheckDTO passwordCheckDTO = (PasswordCheckDTO) obj;
         return passwordCheckDTO.getPassword().equals(passwordCheckDTO.getPassword_confirm());
     }

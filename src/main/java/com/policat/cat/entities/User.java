@@ -25,7 +25,8 @@ public class User {
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;

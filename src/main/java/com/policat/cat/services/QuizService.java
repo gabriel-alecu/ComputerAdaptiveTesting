@@ -1,17 +1,19 @@
 package com.policat.cat.services;
 
-import com.policat.cat.entities.Option;
 import com.policat.cat.entities.Domain;
+import com.policat.cat.entities.Option;
 import com.policat.cat.entities.Question;
-import com.policat.cat.repositories.QuestionRepository;
 import com.policat.cat.repositories.DomainRepository;
+import com.policat.cat.repositories.QuestionRepository;
 import com.policat.cat.session.Quiz;
 import com.policat.cat.session.Response;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class QuizService {
@@ -48,22 +50,22 @@ public class QuizService {
 
     public Response getPreviousResponse(Quiz quiz) {
         List<Response> responses = quiz.getResponses();
-        return responses.get(responses.size()-1);
+        return responses.get(responses.size() - 1);
     }
 
     public Question getQuestionWithScore(Integer score, Quiz quiz) {
         List<Long> usedQuestions = new ArrayList<>();
-        for(Response response : quiz.getResponses()) {
+        for (Response response : quiz.getResponses()) {
             Question question = response.getQuestion();
             usedQuestions.add(question.getId());
         }
         List<Question> available;
-        if(usedQuestions.isEmpty()) {
+        if (usedQuestions.isEmpty()) {
             available = questionRepository.findByScore(quiz.getDomain(), score);
         } else {
             available = questionRepository.findNewByScore(quiz.getDomain(), score, usedQuestions);
         }
-        if(available.isEmpty()) {
+        if (available.isEmpty()) {
             return null;
         }
 
@@ -75,7 +77,7 @@ public class QuizService {
 
     public Integer computedResponseScore(Response response) {
         Integer questionScore = response.getQuestion().getScore();
-        if(response.isCorrect()) {
+        if (response.isCorrect()) {
             questionScore = Math.min(++questionScore, MAX_QUESTION_SCORE);
         } else {
             --questionScore;
@@ -85,7 +87,7 @@ public class QuizService {
 
     public List<Response> getScoreResponses(Quiz quiz) {
         List<Response> responses = quiz.getResponses();
-        if(responses.size() < NUM_SETUP_QUESTIONS) {
+        if (responses.size() < NUM_SETUP_QUESTIONS) {
             return responses.subList(responses.size(), responses.size());
         }
         return responses.subList(NUM_SETUP_QUESTIONS, responses.size());
@@ -95,15 +97,15 @@ public class QuizService {
         Integer sumScores = 0;
         List<Response> responses = getScoreResponses(quiz);
 
-        if(responses.size() == 0) {
+        if (responses.size() == 0) {
             return 0.0;
         }
 
-        for(Response response : responses) {
+        for (Response response : responses) {
             sumScores += computedResponseScore(response);
         }
 
-        return sumScores/(double)responses.size();
+        return sumScores / (double) responses.size();
     }
 
     public Double calcError(Quiz quiz) {
@@ -112,18 +114,18 @@ public class QuizService {
         Double devSum = 0.0;
         List<Response> responses = getScoreResponses(quiz);
 
-        if(responses.size() == 0) {
+        if (responses.size() == 0) {
             return 0.0;
         }
 
-        for(Response response : responses) {
+        for (Response response : responses) {
             Integer questionScore = computedResponseScore(response);
             devSum += Math.pow((questionScore - mean), 2);
         }
-        Double stdDev = Math.sqrt(devSum/responses.size());
+        Double stdDev = Math.sqrt(devSum / responses.size());
 
         //Standard error
-        return stdDev/Math.sqrt(responses.size());
+        return stdDev / Math.sqrt(responses.size());
     }
 
     public Question chooseNextQuestion(Quiz quiz) {
@@ -149,7 +151,7 @@ public class QuizService {
 
     public Integer calcFinalScore(Quiz quiz) {
         Double mean = calcMean(quiz);
-        return (int)(100*mean/MAX_QUESTION_SCORE);
+        return (int) (100 * mean / MAX_QUESTION_SCORE);
     }
 
     public void debugLastResponse(Quiz quiz) {
@@ -163,14 +165,14 @@ public class QuizService {
         System.out.println(lastResponse.getQuestion().getScore());
 
         System.out.print("Corect Answers IDs:");
-        for(Option option : lastResponse.getQuestion().getCorrectOptions()) {
+        for (Option option : lastResponse.getQuestion().getCorrectOptions()) {
             System.out.print(" ");
             System.out.print(option.getId());
         }
         System.out.println();
 
         System.out.print("Selected Answers IDs:");
-        for(Option option : lastResponse.getSelectedOptions()) {
+        for (Option option : lastResponse.getSelectedOptions()) {
             System.out.print(" ");
             System.out.print(option.getId());
         }

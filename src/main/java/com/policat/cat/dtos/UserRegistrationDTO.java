@@ -6,10 +6,10 @@ import javax.validation.constraints.Size;
 
 @PasswordMatches
 public class UserRegistrationDTO implements PasswordCheckDTO {
-    @Size(min=2, max=30)
+    @Size(min = 2, max = 30)
     private String username;
-    
-    @Size(min=6)
+
+    @Size(min = 6)
     private String password;
 
     private String password_confirm;

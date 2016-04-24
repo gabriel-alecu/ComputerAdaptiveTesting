@@ -14,6 +14,7 @@
         .glyphicon-ok {
             color: #3c763d;
         }
+
         .glyphicon-remove {
             color: #a94442;
         }
@@ -43,14 +44,20 @@
     <hr/>
 
     <h3>Results per question:</h3>
-    <div th:each="response : ${quiz.responses}" class="panel" th:classappend="${response.isCorrect()}?'panel-success' : 'panel-danger'">
-        <div class="panel-heading"><span th:text="${response.question.text}">Question</span><span class="pull-right" th:text="${'Difficulty: '+response.question.score + '/5'}">Score</span></div>
+    <div th:each="response : ${quiz.responses}" class="panel"
+         th:classappend="${response.isCorrect()}?'panel-success' : 'panel-danger'">
+        <div class="panel-heading"><span th:text="${response.question.text}">Question</span><span class="pull-right"
+                                                                                                  th:text="${'Difficulty: '+response.question.score + '/5'}">Score</span>
+        </div>
         <div class="panel-body">
             <ul>
                 <li th:each="option : ${response.question.options}">
-                    <span th:if="${response.getSelectedOptions().contains(option) and response.question.getCorrectOptions().contains(option)}" class="glyphicon glyphicon-ok"></span>
-                    <span th:if="${response.getSelectedOptions().contains(option) and !response.question.getCorrectOptions().contains(option)}" class="glyphicon glyphicon-remove"></span>
-                    <span th:classappend="${response.question.getCorrectOptions().contains(option)}?'text-bold' : ''" th:text="${option.text}"></span>
+                    <span th:if="${response.getSelectedOptions().contains(option) and response.question.getCorrectOptions().contains(option)}"
+                          class="glyphicon glyphicon-ok"></span>
+                    <span th:if="${response.getSelectedOptions().contains(option) and !response.question.getCorrectOptions().contains(option)}"
+                          class="glyphicon glyphicon-remove"></span>
+                    <span th:classappend="${response.question.getCorrectOptions().contains(option)}?'text-bold' : ''"
+                          th:text="${option.text}"></span>
                 </li>
             </ul>
         </div>
@@ -60,13 +67,13 @@
 </div>
 
 
-<section layout:fragment="scripts" >
+<section layout:fragment="scripts">
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId      : '236976676635446',
-                xfbml      : true,
-                version    : 'v2.6'
+                appId: '236976676635446',
+                xfbml: true,
+                version: 'v2.6'
             });
         };
 
@@ -74,15 +81,19 @@
             FB.ui({
                 method: 'feed',
                 link: 'https://policat.herokuapp.com',
-                name: "I just completed a "+domain+" domain from PoliCAT!",
-                description: "And I got a score of: "+score+"%"
-            }, function(response){});
+                name: "I just completed a " + domain + " domain from PoliCAT!",
+                description: "And I got a score of: " + score + "%"
+            }, function (response) {
+            });
         }
 
-        (function(d, s, id){
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));

@@ -4,9 +4,9 @@ import com.policat.cat.dtos.QuestionStatsDTO;
 import com.policat.cat.entities.Domain;
 import com.policat.cat.entities.Option;
 import com.policat.cat.entities.Question;
+import com.policat.cat.repositories.DomainRepository;
 import com.policat.cat.repositories.OptionRepository;
 import com.policat.cat.repositories.QuestionRepository;
-import com.policat.cat.repositories.DomainRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,35 +50,35 @@ public class DbManagementController {
         return "manage_db_domains";
     }
 
-    @RequestMapping(value="/domain/rename", method = RequestMethod.POST)
+    @RequestMapping(value = "/domain/rename", method = RequestMethod.POST)
     public String saveChangedDomains(@Valid Domain domain, BindingResult bindingResult) {
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             domainRepository.save(domain);
         }
         return "redirect:/managedb";
     }
 
-    @RequestMapping(value="/domain/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/domain/add", method = RequestMethod.POST)
     public String addDomain(@Valid Domain domain, BindingResult bindingResult) {
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             domainRepository.save(domain);
         }
         return "redirect:/managedb";
     }
 
-    @RequestMapping(value="/domain/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/domain/{id}/delete", method = RequestMethod.GET)
     public String deleteDomain(@PathVariable Long id) {
         domainRepository.delete(id);
         return "redirect:/managedb";
     }
 
 
-    @RequestMapping(value="/domain/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/domain/{id}", method = RequestMethod.GET)
     public String viewQuestions(@PathVariable Long id, Model model) {
         Domain domain = domainRepository.findOne(id);
         List<QuestionStatsDTO> questionsStats = new ArrayList<>();
         List<Object[]> questionsStatsRows = questionRepository.getWithStatsByDomain(domain);
-        for(Object[] row : questionsStatsRows) {
+        for (Object[] row : questionsStatsRows) {
             QuestionStatsDTO questionStatsDTO = new QuestionStatsDTO();
             questionStatsDTO.setQuestion((Question) row[0]);
             questionStatsDTO.setNumOptions((Long) row[1]);
@@ -90,31 +90,31 @@ public class DbManagementController {
         return "manage_db_questions";
     }
 
-    @RequestMapping(value="/domain/{id}/add_question", method = RequestMethod.POST)
+    @RequestMapping(value = "/domain/{id}/add_question", method = RequestMethod.POST)
     public String addQuestion(@PathVariable Long id, @Valid Question question, BindingResult bindingResult) {
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             Domain domain = domainRepository.findOne(id);
             question.setDomain(domain);
             question = questionRepository.save(question);
             domain.addQuestion(question);
             domainRepository.save(domain);
-            return "redirect:/managedb/question/"+question.getId().toString();
+            return "redirect:/managedb/question/" + question.getId().toString();
         }
-        return "redirect:/managedb/domain/"+id.toString();
+        return "redirect:/managedb/domain/" + id.toString();
     }
 
-    @RequestMapping(value="/question/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/question/{id}/delete", method = RequestMethod.GET)
     public String deleteQuestion(@PathVariable Long id, Model model) {
         Question question = questionRepository.findOne(id);
         Domain domain = question.getDomain();
         domain.removeQuestion(question);
         domainRepository.save(domain);
         questionRepository.delete(question);
-        return "redirect:/managedb/domain/"+domain.getId().toString();
+        return "redirect:/managedb/domain/" + domain.getId().toString();
     }
 
 
-    @RequestMapping(value="/question/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
     public String viewQuestion(@PathVariable Long id, Model model) {
         Question question = questionRepository.findOne(id);
         Hibernate.initialize(question.getOptions());
@@ -122,20 +122,20 @@ public class DbManagementController {
         return "manage_db_question";
     }
 
-    @RequestMapping(value="/question/change", method = RequestMethod.POST)
+    @RequestMapping(value = "/question/change", method = RequestMethod.POST)
     public String updateQuestion(@Valid Question question, BindingResult bindingResult, Model model) {
         Question dbQuestion = questionRepository.findOne(question.getId());
         dbQuestion.setText(question.getText());
         dbQuestion.setScore(question.getScore());
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             questionRepository.save(dbQuestion);
         }
-        return "redirect:/managedb/question/"+question.getId().toString();
+        return "redirect:/managedb/question/" + question.getId().toString();
     }
 
-    @RequestMapping(value="/question/{id}/add_option", method = RequestMethod.POST)
+    @RequestMapping(value = "/question/{id}/add_option", method = RequestMethod.POST)
     public String addOption(@PathVariable Long id, @Valid Option option, BindingResult bindingResult) {
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             Question question = questionRepository.findOne(id);
             Option dbOption = new Option();
             dbOption.setText(option.getText());
@@ -145,30 +145,30 @@ public class DbManagementController {
             question.addOption(dbOption);
             questionRepository.save(question);
         }
-        return "redirect:/managedb/question/"+id.toString();
+        return "redirect:/managedb/question/" + id.toString();
     }
 
-    @RequestMapping(value="/option/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/option/{id}/delete", method = RequestMethod.GET)
     public String deleteOption(@PathVariable Long id, Model model) {
         Option option = optionRepository.findOne(id);
         Question question = option.getQuestion();
         question.removeOption(option);
         questionRepository.save(question);
         optionRepository.delete(option);
-        return "redirect:/managedb/question/"+question.getId().toString();
+        return "redirect:/managedb/question/" + question.getId().toString();
     }
 
-    @RequestMapping(value="/option/change", method = RequestMethod.POST)
+    @RequestMapping(value = "/option/change", method = RequestMethod.POST)
     public String updateOption(@Valid Option option, BindingResult bindingResult, Model model) {
         Option dbOption = optionRepository.findOne(option.getId());
         dbOption.setText(option.getText());
         dbOption.setCorrect(option.getCorrect());
-        if(option.getCorrect() == null) {
+        if (option.getCorrect() == null) {
             dbOption.setCorrect(false);
         }
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             optionRepository.save(dbOption);
         }
-        return "redirect:/managedb/question/"+dbOption.getQuestion().getId().toString();
+        return "redirect:/managedb/question/" + dbOption.getQuestion().getId().toString();
     }
 }

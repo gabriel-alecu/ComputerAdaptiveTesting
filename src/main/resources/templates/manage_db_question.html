@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-            xmlns:th="http://www.thymeleaf.org"
-            layout:decorator="layout">
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
 <head>
     <title>Edit Question</title>
 </head>
@@ -14,7 +14,8 @@
 
     <ol class="breadcrumb">
         <li><a th:href="@{/managedb}">Domains</a></li>
-        <li><a th:href="@{/managedb/domain/{id}(id=${question.domain.id})}" th:text="${question.domain.name}">Domain</a></li>
+        <li><a th:href="@{/managedb/domain/{id}(id=${question.domain.id})}" th:text="${question.domain.name}">Domain</a>
+        </li>
         <li class="active">Question</li>
     </ol>
 

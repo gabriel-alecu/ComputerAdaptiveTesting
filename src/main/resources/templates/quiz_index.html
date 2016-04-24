@@ -8,7 +8,6 @@
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
 
 
-
 </head>
 <body>
 
@@ -19,17 +18,17 @@
         <h1>Quizzes</h1>
     </div>
 
-<div class="col-sm-8 text-left">
-    <h3>Select the programming language:</h3>
-    <form th:action="@{/quiz}" method="post" role="form">
-        <div class="radio" th:each="d : ${domains}">
-            <label><input type="radio" name="domain" th:value="${d.getId()}" th:text="${d.getName()}"/> </label>
-        </div>
-        <input type="submit" value="Begin Quiz"/>
+    <div class="col-sm-8 text-left">
+        <h3>Select the programming language:</h3>
+        <form th:action="@{/quiz}" method="post" role="form">
+            <div class="radio" th:each="d : ${domains}">
+                <label><input type="radio" name="domain" th:value="${d.getId()}" th:text="${d.getName()}"/> </label>
+            </div>
+            <input type="submit" value="Begin Quiz"/>
 
 
-    </form>
-</div>
+        </form>
     </div>
+</div>
 </body>
 </html>

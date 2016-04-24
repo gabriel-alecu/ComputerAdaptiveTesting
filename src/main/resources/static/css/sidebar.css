@@ -6,7 +6,7 @@ nav.sidebar {
     transition: left 200ms ease-out;
 }
 
-.main{
+.main {
     -webkit-transition: margin 200ms ease-out;
     -moz-transition: margin 200ms ease-out;
     -o-transition: margin 200ms ease-out;
@@ -38,17 +38,17 @@ nav.sidebar {
         margin-right: 0;
     }
 
-    .navbar.sidebar:hover{
+    .navbar.sidebar:hover {
         left: 0;
     }
 
-    .navbar.sidebar:hover + .main{
+    .navbar.sidebar:hover + .main {
         margin-left: 200px;
         margin-right: -160px;
     }
 
-        /*allows nav box to use 100% width*/
-    .navbar.sidebar .navbar-collapse, .navbar.sidebar .container-fluid{
+    /*allows nav box to use 100% width*/
+    .navbar.sidebar .navbar-collapse, .navbar.sidebar .container-fluid {
         padding: 0;
     }
 
@@ -59,10 +59,11 @@ nav.sidebar {
     }
 
     /*adds border to nav boxes* */
-    nav.sidebar .navbar-nav > li:first-child{
+    nav.sidebar .navbar-nav > li:first-child {
         border-top: 1px #e5e5e5 solid;
     }
-    nav.sidebar .navbar-nav > li{
+
+    nav.sidebar .navbar-nav > li {
         border-bottom: 1px #e5e5e5 solid;
     }
 
@@ -91,7 +92,7 @@ nav.sidebar {
         margin-right: 0;
     }
 
-    .navbar.sidebar:hover + .main{
+    .navbar.sidebar:hover + .main {
         margin-left: 200px;
         margin-right: 0;
     }

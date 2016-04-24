@@ -1,7 +1,7 @@
 package com.policat.cat.controllers;
 
-import com.policat.cat.entities.User;
 import com.policat.cat.dtos.UserRegistrationDTO;
+import com.policat.cat.entities.User;
 import com.policat.cat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class RegistrationController {
         return "register";
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String registerUser(@Valid UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             User newUser = userService.registerUserAccount(userRegistrationDTO);

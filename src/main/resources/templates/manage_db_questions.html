@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-            xmlns:th="http://www.thymeleaf.org"
-            layout:decorator="layout">
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
 <head>
     <title>Edit Questions</title>
 </head>
@@ -20,27 +20,27 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Question</th>
-                <th>Score</th>
-                <th>Num Options</th>
-                <th>Num Correct Options</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Question</th>
+            <th>Score</th>
+            <th>Num Options</th>
+            <th>Num Correct Options</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-            <!--/*@thymesVar id="questionsStats" type="List<com.policat.cat.dtos.QuestionStatsDTO>"*/-->
-            <!--/*@thymesVar id="qs" type="com.policat.cat.dtos.QuestionStatsDTO"*/-->
-            <tr th:each="qs : ${questionsStats}">
-                <td th:text="${qs.question.text}"></td>
-                <td th:text="${qs.question.score}"></td>
-                <td th:text="${qs.numOptions}"></td>
-                <td th:text="${qs.numCorrectOptions}"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/managedb/question/{id}(id=${qs.question.id})}">Edit</a>
-                    <a class="btn btn-danger" th:href="@{/managedb/question/{id}/delete(id=${qs.question.id})}">Remove</a>
-                </td>
-            </tr>
+        <!--/*@thymesVar id="questionsStats" type="List<com.policat.cat.dtos.QuestionStatsDTO>"*/-->
+        <!--/*@thymesVar id="qs" type="com.policat.cat.dtos.QuestionStatsDTO"*/-->
+        <tr th:each="qs : ${questionsStats}">
+            <td th:text="${qs.question.text}"></td>
+            <td th:text="${qs.question.score}"></td>
+            <td th:text="${qs.numOptions}"></td>
+            <td th:text="${qs.numCorrectOptions}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/managedb/question/{id}(id=${qs.question.id})}">Edit</a>
+                <a class="btn btn-danger" th:href="@{/managedb/question/{id}/delete(id=${qs.question.id})}">Remove</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 

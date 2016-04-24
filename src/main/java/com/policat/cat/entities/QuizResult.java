@@ -13,7 +13,7 @@ public class QuizResult {
     @Column(nullable = false)
     private Integer score;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
@@ -26,7 +26,8 @@ public class QuizResult {
     private Domain domain;
 
 
-    public QuizResult() {}
+    public QuizResult() {
+    }
 
     public QuizResult(Integer score, User user, Domain domain) {
         Calendar calendar = Calendar.getInstance();

@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User registerUserAccount(UserRegistrationDTO userRegistrationDTO) {
-        if(findUser(userRegistrationDTO.getUsername()) != null) {
+        if (findUser(userRegistrationDTO.getUsername()) != null) {
             return null;
         }
 

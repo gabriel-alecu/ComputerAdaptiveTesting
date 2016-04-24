@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class PasswordChangeDTO implements PasswordCheckDTO {
     private String old_password;
 
-    @Size(min=6)
+    @Size(min = 6)
     private String password;
 
     private String password_confirm;

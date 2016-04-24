@@ -46,7 +46,7 @@ public class Quiz {
 
     public ArrayList<Long> getCurrentSelectedAnswers() {
         //workaround for null when no answers are selected
-        if(this.currentSelectedAnswers == null) {
+        if (this.currentSelectedAnswers == null) {
             this.currentSelectedAnswers = new ArrayList<>();
         }
         return this.currentSelectedAnswers;

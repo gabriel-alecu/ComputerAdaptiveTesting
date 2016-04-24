@@ -8,52 +8,58 @@
 </head>
 <body>
 
-    <div layout:fragment="content">
-        <div class="jumbotron">
-            <h1>Computer Adaptive Testing </h1>
-        </div>
-
-        <div style="text-align: right"> <h4 style="color:#004669"><b>Time left: <span id="clockdiv"></span></b></h4></div><br/>
-
-        <h3><b><div th:text="${quiz.getCurrentQuestion().getText()}"></div></b></h3><hr/>
-
-        <div >
-            <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${quiz}">
-               <div class="option" th:each="option : ${quiz.currentQuestion.options}">
-                 <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${option.id}" />
-                  <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${option.text}">Answer</label>
-              </div>
-                <br/><br/>
-                <button type="submit" class="btn btn-primary" value="Next">Next</button>
-           </form>
-        </div>
+<div layout:fragment="content">
+    <div class="jumbotron">
+        <h1>Computer Adaptive Testing </h1>
     </div>
 
+    <div style="text-align: right"><h4 style="color:#004669"><b>Time left: <span id="clockdiv"></span></b></h4></div>
+    <br/>
 
-<section layout:fragment="scripts" >
+    <h3><b>
+        <div th:text="${quiz.getCurrentQuestion().getText()}"></div>
+    </b></h3>
+    <hr/>
+
+    <div>
+        <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${quiz}">
+            <div class="option" th:each="option : ${quiz.currentQuestion.options}">
+                <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${option.id}"/>
+                <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${option.text}">Answer</label>
+            </div>
+            <br/><br/>
+            <button type="submit" class="btn btn-primary" value="Next">Next</button>
+        </form>
+    </div>
+</div>
+
+
+<section layout:fragment="scripts">
     <script>
         /*<![CDATA[*/
 
-        function getTimeRemaining(endDate){
+        function getTimeRemaining(endDate) {
             var t = endDate - new Date();
-            return Math.floor(t/1000);
+            return Math.floor(t / 1000);
         }
 
-        function updateTimer(clock, endDate, formId, timeinterval){
+        function updateTimer(clock, endDate, formId, timeinterval) {
             var t = getTimeRemaining(endDate);
             clock.innerHTML = t + ' sec ';
-            if(t<=0){
+            if (t <= 0) {
                 clearInterval(timeinterval);
                 alert("Response time expired");
                 document.getElementById(formId).submit();
             }
         }
 
-        function initializeClock(id, timeLimit, formId){
+        function initializeClock(id, timeLimit, formId) {
             var clock = document.getElementById(id);
             var endDate = new Date();
-            endDate.setTime(endDate.getTime() + timeLimit*1000);
-            var timeinterval = setInterval(function(){updateTimer(clock, endDate, formId, timeinterval);},1000);
+            endDate.setTime(endDate.getTime() + timeLimit * 1000);
+            var timeinterval = setInterval(function () {
+                updateTimer(clock, endDate, formId, timeinterval);
+            }, 1000);
             updateTimer(clock, endDate, formId, timeinterval);
         }
 

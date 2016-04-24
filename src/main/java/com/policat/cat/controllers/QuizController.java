@@ -2,8 +2,8 @@ package com.policat.cat.controllers;
 
 import com.policat.cat.auth.AuthedUser;
 import com.policat.cat.entities.*;
-import com.policat.cat.repositories.QuizResultRepository;
 import com.policat.cat.repositories.DomainRepository;
+import com.policat.cat.repositories.QuizResultRepository;
 import com.policat.cat.services.QuizService;
 import com.policat.cat.session.Quiz;
 import com.policat.cat.session.Response;
@@ -65,23 +65,23 @@ public class QuizController {
         return "redirect:/quiz/question";
     }
 
-    @RequestMapping(value="/question", method = RequestMethod.GET)
+    @RequestMapping(value = "/question", method = RequestMethod.GET)
     public String displayChoice(@ModelAttribute Quiz quiz, SessionStatus sessionStatus) {
         //if you get on this page directly, without starting a quiz first
-        if(quiz.getDomain() == null || quiz.getCompleted()) {
+        if (quiz.getDomain() == null || quiz.getCompleted()) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
         }
 
         //replace it only if it's not already set (to prevent using page refresh in order to get a new one)
         Question currentQuestion = quiz.getCurrentQuestion();
-        if(currentQuestion == null) {
+        if (currentQuestion == null) {
             currentQuestion = quizService.chooseNextQuestion(quiz);
         }
         quiz.setCurrentQuestion(currentQuestion);
 
         //if there are no more questions available, end the quiz
-        if(currentQuestion == null) {
+        if (currentQuestion == null) {
             quiz.setCompleted(true);
             return "redirect:/quiz/result";
         }
@@ -89,15 +89,15 @@ public class QuizController {
         return "quiz_question";
     }
 
-    @RequestMapping(value="/question", method = RequestMethod.POST)
+    @RequestMapping(value = "/question", method = RequestMethod.POST)
     public String processChoice(@ModelAttribute Quiz quiz, SessionStatus sessionStatus) {
-        if(quiz.getDomain() == null || quiz.getCompleted()) {
+        if (quiz.getDomain() == null || quiz.getCompleted()) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
         }
 
         Question newQuestion = quizService.chooseNextQuestion(quiz);
-        if(newQuestion == null) {
+        if (newQuestion == null) {
             quiz.setCompleted(true);
             return "redirect:/quiz/result";
         }
@@ -108,7 +108,7 @@ public class QuizController {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
         //If time limit was reached, we don't take in account the answers
-        if(quiz.getQuestionTimeLimit().after(now)) {
+        if (quiz.getQuestionTimeLimit().after(now)) {
             for (Long chosenId : quiz.getCurrentSelectedAnswers()) {
                 for (Option option : quiz.getCurrentQuestion().getOptions()) {
                     if (option.getId().equals(chosenId)) {
@@ -131,14 +131,14 @@ public class QuizController {
         return this.displayChoice(quiz, sessionStatus);
     }
 
-    @RequestMapping(value="/result", method = RequestMethod.GET)
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
     public String displayResults(@ModelAttribute Quiz quiz, SessionStatus sessionStatus, Model model) {
-        if(quiz.getDomain() == null) {
+        if (quiz.getDomain() == null) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
         }
 
-        if(!quiz.getCompleted()) {
+        if (!quiz.getCompleted()) {
             return "redirect:/quiz/question";
         }
 

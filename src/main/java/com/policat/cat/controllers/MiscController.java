@@ -1,9 +1,9 @@
 package com.policat.cat.controllers;
 
 import com.policat.cat.auth.AuthedUser;
+import com.policat.cat.dtos.PasswordChangeDTO;
 import com.policat.cat.entities.User;
 import com.policat.cat.services.UserService;
-import com.policat.cat.dtos.PasswordChangeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,12 +18,12 @@ public class MiscController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value="/changepass", method = RequestMethod.GET)
+    @RequestMapping(value = "/changepass", method = RequestMethod.GET)
     public String showPasswordChangeForm(PasswordChangeDTO passwordChangeDTO) {
         return "change_password";
     }
 
-    @RequestMapping(value="/changepass", method=RequestMethod.POST)
+    @RequestMapping(value = "/changepass", method = RequestMethod.POST)
     public String changePassword(@Valid PasswordChangeDTO passwordChangeDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

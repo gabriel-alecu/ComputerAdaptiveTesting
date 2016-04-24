@@ -3,10 +3,9 @@ package com.policat.cat.entities;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="[option]")
+@Table(name = "[option]")
 public class Option {
     @Id
     @GeneratedValue
@@ -17,14 +16,15 @@ public class Option {
     private String text;
 
     @Column(nullable = false)
-    private Boolean correct=false;
+    private Boolean correct = false;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Question question;
 
 
-    public Option() {}
+    public Option() {
+    }
 
     public Option(String text, Boolean correct, Question question) {
         this.text = text;
