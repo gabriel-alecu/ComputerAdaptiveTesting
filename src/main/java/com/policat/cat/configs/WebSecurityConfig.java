@@ -1,6 +1,6 @@
 package com.policat.cat.configs;
 
-import com.policat.cat.auth.AuthedUser;
+import com.policat.cat.session.AuthedUser;
 import com.policat.cat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

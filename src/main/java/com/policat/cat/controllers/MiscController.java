@@ -1,6 +1,6 @@
 package com.policat.cat.controllers;
 
-import com.policat.cat.auth.AuthedUser;
+import com.policat.cat.session.AuthedUser;
 import com.policat.cat.dtos.PasswordChangeDTO;
 import com.policat.cat.entities.User;
 import com.policat.cat.services.UserService;

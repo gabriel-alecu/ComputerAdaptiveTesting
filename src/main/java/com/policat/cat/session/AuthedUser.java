@@ -1,5 +1,6 @@
-package com.policat.cat.auth;
+package com.policat.cat.session;
 
+import com.policat.cat.enums.Role;
 import com.policat.cat.entities.User;
 import org.springframework.security.core.authority.AuthorityUtils;
 

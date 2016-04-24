@@ -35,22 +35,6 @@ public class Question {
     private List<Option> options = new ArrayList<>();
 
 
-    public Question() {
-    }
-
-    public Question(String text, Integer score, Domain domain) {
-        this.text = text;
-        this.score = score;
-        this.domain = domain;
-    }
-
-    public Question(String text, Integer score, Domain domain, List<Option> options) {
-        this.text = text;
-        this.score = score;
-        this.domain = domain;
-        this.options = options;
-    }
-
     public Long getId() {
         return id;
     }

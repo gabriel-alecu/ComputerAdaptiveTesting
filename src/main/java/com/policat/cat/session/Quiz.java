@@ -1,14 +1,15 @@
 package com.policat.cat.session;
 
+import com.policat.cat.configs.QuizConfig;
 import com.policat.cat.entities.Domain;
 import com.policat.cat.entities.Question;
-import com.policat.cat.services.QuizService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Scope("session")
@@ -40,7 +41,7 @@ public class Quiz {
         this.currentSelectedAnswers = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, QuizService.MAX_QUESTION_TIME);
+        calendar.add(Calendar.SECOND, QuizConfig.MAX_QUESTION_TIME);
         this.questionTimeLimit = calendar.getTime();
     }
 
@@ -82,5 +83,9 @@ public class Quiz {
 
     public void addResponse(Response response) {
         this.responses.add(response);
+    }
+
+    public Response getMostRecentResponse() {
+        return responses.get(responses.size() - 1);
     }
 }

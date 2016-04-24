@@ -24,18 +24,6 @@ public class Domain implements Serializable {
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
-    public Domain() {
-    }
-
-    public Domain(String name) {
-        this.name = name;
-    }
-
-    public Domain(String name, List<Question> questions) {
-        this.name = name;
-        this.questions = questions;
-    }
-
     public Long getId() {
         return id;
     }

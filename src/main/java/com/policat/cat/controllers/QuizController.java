@@ -1,6 +1,6 @@
 package com.policat.cat.controllers;
 
-import com.policat.cat.auth.AuthedUser;
+import com.policat.cat.session.AuthedUser;
 import com.policat.cat.entities.*;
 import com.policat.cat.repositories.DomainRepository;
 import com.policat.cat.repositories.QuizResultRepository;
@@ -149,7 +149,10 @@ public class QuizController {
 
         Domain domain = quiz.getDomain();
 
-        QuizResult quizResult = new QuizResult(score, user, domain);
+        QuizResult quizResult = new QuizResult();
+        quizResult.setScore(score);
+        quizResult.setUser(user);
+        quizResult.setDomain(domain);
         quizResultRepository.save(quizResult);
         model.addAttribute(quizResult);
 

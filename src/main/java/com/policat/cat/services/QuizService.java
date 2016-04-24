@@ -1,5 +1,6 @@
 package com.policat.cat.services;
 
+import com.policat.cat.configs.QuizConfig;
 import com.policat.cat.entities.Domain;
 import com.policat.cat.entities.Option;
 import com.policat.cat.entities.Question;
@@ -17,16 +18,6 @@ import java.util.Random;
 
 @Service
 public class QuizService {
-    public static final int MAX_QUESTION_SCORE = 5;
-    public static final int MIN_QUESTION_SCORE = 1;
-
-    public static final int START_QUESTION_SCORE = 3;
-    public static final int NUM_SETUP_QUESTIONS = 2;
-
-    public static final int MIN_QUESTIONS = 5;
-    public static final int MAX_QUESTIONS = 25;
-    public static final int MAX_QUESTION_TIME = 60;  //seconds
-    public static final double ERROR_LIMIT = .2;
 
 
     @Autowired
@@ -46,11 +37,6 @@ public class QuizService {
         question = questionRepository.findOne(question.getId());
         Hibernate.initialize(question.getOptions());
         return question;
-    }
-
-    public Response getPreviousResponse(Quiz quiz) {
-        List<Response> responses = quiz.getResponses();
-        return responses.get(responses.size() - 1);
     }
 
     public Question getQuestionWithScore(Integer score, Quiz quiz) {
@@ -78,19 +64,20 @@ public class QuizService {
     public Integer computedResponseScore(Response response) {
         Integer questionScore = response.getQuestion().getScore();
         if (response.isCorrect()) {
-            questionScore = Math.min(++questionScore, MAX_QUESTION_SCORE);
+            questionScore = Math.min(++questionScore, QuizConfig.MAX_QUESTION_SCORE);
         } else {
             --questionScore;
         }
         return questionScore;
     }
 
+    //the first NUM_SETUP_QUESTIONS responses are used for calibration, and are ignored in the scoring
     public List<Response> getScoreResponses(Quiz quiz) {
         List<Response> responses = quiz.getResponses();
-        if (responses.size() < NUM_SETUP_QUESTIONS) {
+        if (responses.size() < QuizConfig.NUM_SETUP_QUESTIONS) {
             return responses.subList(responses.size(), responses.size());
         }
-        return responses.subList(NUM_SETUP_QUESTIONS, responses.size());
+        return responses.subList(QuizConfig.NUM_SETUP_QUESTIONS, responses.size());
     }
 
     public Double calcMean(Quiz quiz) {
@@ -130,28 +117,28 @@ public class QuizService {
 
     public Question chooseNextQuestion(Quiz quiz) {
         if (quiz.getResponses().isEmpty()) {
-            return getQuestionWithScore(START_QUESTION_SCORE, quiz);
-        } else if (quiz.getResponses().size() >= MAX_QUESTIONS) {
+            return getQuestionWithScore(QuizConfig.START_QUESTION_SCORE, quiz);
+        } else if (quiz.getResponses().size() >= QuizConfig.MAX_QUESTIONS) {
             return null;
         }
 
-        if (quiz.getResponses().size() > MIN_QUESTIONS && calcError(quiz) < ERROR_LIMIT) {
+        if (quiz.getResponses().size() > QuizConfig.MIN_QUESTIONS && calcError(quiz) < QuizConfig.ERROR_LIMIT) {
             return null;
         }
 
-        Response lastResponse = getPreviousResponse(quiz);
+        Response mostRecentResponse = quiz.getMostRecentResponse();
         Integer nextQuestionScore;
-        if (lastResponse.isCorrect()) {
-            nextQuestionScore = Math.min(lastResponse.getQuestion().getScore() + 1, MAX_QUESTION_SCORE);
+        if (mostRecentResponse.isCorrect()) {
+            nextQuestionScore = Math.min(mostRecentResponse.getQuestion().getScore() + 1, QuizConfig.MAX_QUESTION_SCORE);
         } else {
-            nextQuestionScore = Math.max(lastResponse.getQuestion().getScore() - 1, MIN_QUESTION_SCORE);
+            nextQuestionScore = Math.max(mostRecentResponse.getQuestion().getScore() - 1, QuizConfig.MIN_QUESTION_SCORE);
         }
         return getQuestionWithScore(nextQuestionScore, quiz);
     }
 
     public Integer calcFinalScore(Quiz quiz) {
         Double mean = calcMean(quiz);
-        return (int) (100 * mean / MAX_QUESTION_SCORE);
+        return (int) (100 * mean / QuizConfig.MAX_QUESTION_SCORE);
     }
 
     public void debugLastResponse(Quiz quiz) {

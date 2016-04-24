@@ -23,15 +23,6 @@ public class Option {
     private Question question;
 
 
-    public Option() {
-    }
-
-    public Option(String text, Boolean correct, Question question) {
-        this.text = text;
-        this.correct = correct;
-        this.question = question;
-    }
-
     public Long getId() {
         return id;
     }

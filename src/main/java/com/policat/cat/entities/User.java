@@ -1,6 +1,6 @@
 package com.policat.cat.entities;
 
-import com.policat.cat.auth.Role;
+import com.policat.cat.enums.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,20 +24,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<QuizResult> quizResults = new ArrayList<>();
 
-
-    public User() {
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User(String username, String password, Role role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     public Long getId() {
         return id;
