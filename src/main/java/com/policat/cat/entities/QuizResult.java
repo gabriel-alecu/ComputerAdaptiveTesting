@@ -1,7 +1,5 @@
 package com.policat.cat.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,18 +23,18 @@ public class QuizResult {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Quiz quiz;
+    private Domain domain;
 
 
     public QuizResult() {}
 
-    public QuizResult(Integer score, User user, Quiz quiz) {
+    public QuizResult(Integer score, User user, Domain domain) {
         Calendar calendar = Calendar.getInstance();
         this.date = calendar.getTime();
 
         this.score = score;
         this.user = user;
-        this.quiz = quiz;
+        this.domain = domain;
     }
 
     public Long getId() {
@@ -67,11 +65,11 @@ public class QuizResult {
         this.user = user;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 }

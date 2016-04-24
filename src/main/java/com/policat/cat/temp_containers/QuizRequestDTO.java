@@ -1,18 +1,18 @@
 package com.policat.cat.temp_containers;
 
-import com.policat.cat.entities.Quiz;
+import com.policat.cat.entities.Domain;
 
 import javax.validation.constraints.NotNull;
 
 public class QuizRequestDTO {
     @NotNull
-    private Quiz quiz;
+    private Domain domain;
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 }

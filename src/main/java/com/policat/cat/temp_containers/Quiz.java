@@ -1,7 +1,7 @@
 package com.policat.cat.temp_containers;
 
+import com.policat.cat.entities.Domain;
 import com.policat.cat.entities.Question;
-import com.policat.cat.entities.Quiz;
 import com.policat.cat.services.QuizService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,23 +12,23 @@ import java.util.Date;
 
 @Component
 @Scope("session")
-public class OngoingQuiz {
-    private Quiz quiz;
+public class Quiz {
+    private Domain domain;
     private Question currentQuestion;
     private ArrayList<Long> currentSelectedAnswers = new ArrayList<>();
     private Date questionTimeLimit;
     private Boolean completed = false;
-    private ArrayList<QuestionResponse> questionsResponses = new ArrayList<>();
+    private ArrayList<Response> questionsResponses = new ArrayList<>();
 
-    public OngoingQuiz() {
+    public Quiz() {
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
     public Question getCurrentQuestion() {
@@ -72,15 +72,15 @@ public class OngoingQuiz {
         this.completed = completed;
     }
 
-    public ArrayList<QuestionResponse> getQuestionsResponses() {
+    public ArrayList<Response> getQuestionsResponses() {
         return questionsResponses;
     }
 
-    public void setQuestionsResponses(ArrayList<QuestionResponse> questionsResponses) {
+    public void setQuestionsResponses(ArrayList<Response> questionsResponses) {
         this.questionsResponses = questionsResponses;
     }
 
-    public void addQuestionResponse(QuestionResponse questionResponse) {
-        this.questionsResponses.add(questionResponse);
+    public void addQuestionResponse(Response response) {
+        this.questionsResponses.add(response);
     }
 }

@@ -1,6 +1,11 @@
 package com.policat.cat.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,33 +17,37 @@ public class Question {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false)
     private String text;
 
+    @NotNull
+    @Min(1)
+    @Max(5)
     @Column(nullable = false)
     private Integer score;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Quiz quiz;
+    private Domain domain;
 
     @OneToMany(mappedBy = "question")
-    private List<Answer> answers = new ArrayList<>();
+    private List<Option> options = new ArrayList<>();
 
 
     public Question() {}
 
-    public Question(String text, Integer score, Quiz quiz) {
+    public Question(String text, Integer score, Domain domain) {
         this.text = text;
         this.score = score;
-        this.quiz = quiz;
+        this.domain = domain;
     }
 
-    public Question(String text, Integer score, Quiz quiz, List<Answer> answers) {
+    public Question(String text, Integer score, Domain domain, List<Option> options) {
         this.text = text;
         this.score = score;
-        this.quiz = quiz;
-        this.answers = answers;
+        this.domain = domain;
+        this.options = options;
     }
 
     public Long getId() {
@@ -61,30 +70,30 @@ public class Question {
         this.score = score;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public List<Option> getOptions() {
+        return options;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setOptions(List<Option> options) {
+        this.options = options;
     }
 
     @Transient
-    public Set<Answer> getCorrectAnswers() {
-        Set<Answer> correctAnswers = new HashSet<>();
-        for(Answer answer : answers) {
-            if(answer.getCorrect()) {
-                correctAnswers.add(answer);
+    public Set<Option> getCorrectAnswers() {
+        Set<Option> correctOptions = new HashSet<>();
+        for(Option option : options) {
+            if(option.getCorrect()) {
+                correctOptions.add(option);
             }
         }
-        return correctAnswers;
+        return correctOptions;
     }
 }

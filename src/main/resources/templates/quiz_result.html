@@ -34,7 +34,7 @@
     <h3>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h3>
     <!--<p><a th:href="@{/index}">Click here to go back to the main page</a></p>-->
     <div align="center">
-        <a th:href="'javascript:share(' + ${quizResult.score} + ',\'' + ${quizResult.quiz.name} + '\');'">
+        <a th:href="'javascript:share(' + ${quizResult.score} + ',\'' + ${quizResult.domain.name} + '\');'">
             <img th:src="@{/images/fb_share_button.png}" alt="Share on Facebook"/>
         </a>
     </div>
@@ -46,10 +46,10 @@
         <div class="panel-heading"><span th:text="${response.question.text}">Question</span><span class="pull-right" th:text="${'Difficulty: '+response.question.score + '/5'}">Score</span></div>
         <div class="panel-body">
             <ul>
-                <li th:each="answer : ${response.question.answers}">
-                    <span th:if="${response.getSelectedAnswers().contains(answer) and response.question.getCorrectAnswers().contains(answer)}" class="glyphicon glyphicon-ok"></span>
-                    <span th:if="${response.getSelectedAnswers().contains(answer) and !response.question.getCorrectAnswers().contains(answer)}" class="glyphicon glyphicon-remove"></span>
-                    <span  th:classappend="${response.question.getCorrectAnswers().contains(answer)}?'text-bold' : ''" th:text="${answer.text}"></span>
+                <li th:each="option : ${response.question.options}">
+                    <span th:if="${response.getSelectedOptions().contains(option) and response.question.getCorrectAnswers().contains(option)}" class="glyphicon glyphicon-ok"></span>
+                    <span th:if="${response.getSelectedOptions().contains(option) and !response.question.getCorrectAnswers().contains(option)}" class="glyphicon glyphicon-remove"></span>
+                    <span  th:classappend="${response.question.getCorrectAnswers().contains(option)}?'text-bold' : ''" th:text="${option.text}"></span>
                 </li>
             </ul>
         </div>

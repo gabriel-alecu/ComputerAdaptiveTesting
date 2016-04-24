@@ -1,39 +1,48 @@
 package com.policat.cat.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Quiz implements Serializable {
+public class Domain implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "domain")
     private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "domain")
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
-    public Quiz() {}
+    public Domain() {}
 
-    public Quiz(String name) {
+    public Domain(String name) {
         this.name = name;
     }
 
-    public Quiz(String name, List<Question> questions) {
+    public Domain(String name, List<Question> questions) {
         this.name = name;
         this.questions = questions;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -58,5 +67,10 @@ public class Quiz implements Serializable {
 
     public void setQuizResults(List<QuizResult> quizResults) {
         this.quizResults = quizResults;
+    }
+
+    @Transient
+    public void addQuestion(Question question) {
+        this.questions.add(question);
     }
 }

@@ -19,9 +19,9 @@
 
         <div >
             <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
-               <div class="option" th:each="answer : ${ongoingQuiz.currentQuestion.answers}">
-                 <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${answer.id}" />
-                  <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${answer.text}">Answer</label>
+               <div class="option" th:each="option : ${ongoingQuiz.currentQuestion.options}">
+                 <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${option.id}" />
+                  <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${option.text}">Answer</label>
               </div>
                 <br/><br/>
                 <button type="submit" class="btn btn-primary" value="Next">Next</button>

@@ -3,7 +3,7 @@ package com.policat.cat.entities;
 import javax.persistence.*;
 
 @Entity
-public class Answer {
+public class Option {
     @Id
     @GeneratedValue
     private Long id;
@@ -19,9 +19,9 @@ public class Answer {
     private Question question;
 
 
-    public Answer() {}
+    public Option() {}
 
-    public Answer(String text, Boolean isCorrect, Question question) {
+    public Option(String text, Boolean isCorrect, Question question) {
         this.text = text;
         this.isCorrect = isCorrect;
         this.question = question;
