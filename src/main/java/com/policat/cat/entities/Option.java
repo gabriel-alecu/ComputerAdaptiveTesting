@@ -3,6 +3,7 @@ package com.policat.cat.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name="[option]")
 public class Option {
     @Id
     @GeneratedValue

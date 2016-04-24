@@ -40,20 +40,20 @@ public class QuizService {
         return domain;
     }
 
-    public Question getQuestionAnswers(Question question) {
+    public Question getQuestionOptions(Question question) {
         question = questionRepository.findOne(question.getId());
         Hibernate.initialize(question.getOptions());
         return question;
     }
 
     public Response getPreviousResponse(Quiz quiz) {
-        List<Response> responses = quiz.getQuestionsResponses();
+        List<Response> responses = quiz.getResponses();
         return responses.get(responses.size()-1);
     }
 
     public Question getQuestionWithScore(Integer score, Quiz quiz) {
         List<Long> usedQuestions = new ArrayList<>();
-        for(Response response : quiz.getQuestionsResponses()) {
+        for(Response response : quiz.getResponses()) {
             Question question = response.getQuestion();
             usedQuestions.add(question.getId());
         }
@@ -70,7 +70,7 @@ public class QuizService {
         Random randGen = new Random();
         Integer chosenPos = randGen.nextInt(available.size());
         Question chosen = available.get(chosenPos);
-        return getQuestionAnswers(chosen);
+        return getQuestionOptions(chosen);
     }
 
     public Integer computedResponseScore(Response response) {
@@ -84,7 +84,7 @@ public class QuizService {
     }
 
     public List<Response> getScoreResponses(Quiz quiz) {
-        List<Response> responses = quiz.getQuestionsResponses();
+        List<Response> responses = quiz.getResponses();
         if(responses.size() < NUM_SETUP_QUESTIONS) {
             return responses.subList(responses.size(), responses.size());
         }
@@ -127,13 +127,13 @@ public class QuizService {
     }
 
     public Question chooseNextQuestion(Quiz quiz) {
-        if (quiz.getQuestionsResponses().isEmpty()) {
+        if (quiz.getResponses().isEmpty()) {
             return getQuestionWithScore(START_QUESTION_SCORE, quiz);
-        } else if (quiz.getQuestionsResponses().size() >= MAX_QUESTIONS) {
+        } else if (quiz.getResponses().size() >= MAX_QUESTIONS) {
             return null;
         }
 
-        if (quiz.getQuestionsResponses().size() > MIN_QUESTIONS && calcError(quiz) < ERROR_LIMIT) {
+        if (quiz.getResponses().size() > MIN_QUESTIONS && calcError(quiz) < ERROR_LIMIT) {
             return null;
         }
 
@@ -153,8 +153,8 @@ public class QuizService {
     }
 
     public void debugLastResponse(Quiz quiz) {
-        List<Response> responses = quiz.getQuestionsResponses();
-        Response lastResponse = responses.get(quiz.getQuestionsResponses().size() - 1);
+        List<Response> responses = quiz.getResponses();
+        Response lastResponse = responses.get(quiz.getResponses().size() - 1);
 
         System.out.print("Question ID: ");
         System.out.println(lastResponse.getQuestion().getId());
@@ -163,7 +163,7 @@ public class QuizService {
         System.out.println(lastResponse.getQuestion().getScore());
 
         System.out.print("Corect Answers IDs:");
-        for(Option option : lastResponse.getQuestion().getCorrectAnswers()) {
+        for(Option option : lastResponse.getQuestion().getCorrectOptions()) {
             System.out.print(" ");
             System.out.print(option.getId());
         }

@@ -31,6 +31,7 @@
     </div>
 
     <h2>Quiz completed successfully!</h2>
+    <!--/*@thymesVar id="quizResult" type="com.policat.cat.entities.QuizResult"*/-->
     <h3>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h3>
     <!--<p><a th:href="@{/index}">Click here to go back to the main page</a></p>-->
     <div align="center">
@@ -42,14 +43,14 @@
     <hr/>
 
     <h3>Results per question:</h3>
-    <div th:each="response : ${ongoingQuiz.questionsResponses}" class="panel" th:classappend="${response.isCorrect()}?'panel-success' : 'panel-danger'">
+    <div th:each="response : ${quiz.responses}" class="panel" th:classappend="${response.isCorrect()}?'panel-success' : 'panel-danger'">
         <div class="panel-heading"><span th:text="${response.question.text}">Question</span><span class="pull-right" th:text="${'Difficulty: '+response.question.score + '/5'}">Score</span></div>
         <div class="panel-body">
             <ul>
                 <li th:each="option : ${response.question.options}">
-                    <span th:if="${response.getSelectedOptions().contains(option) and response.question.getCorrectAnswers().contains(option)}" class="glyphicon glyphicon-ok"></span>
-                    <span th:if="${response.getSelectedOptions().contains(option) and !response.question.getCorrectAnswers().contains(option)}" class="glyphicon glyphicon-remove"></span>
-                    <span  th:classappend="${response.question.getCorrectAnswers().contains(option)}?'text-bold' : ''" th:text="${option.text}"></span>
+                    <span th:if="${response.getSelectedOptions().contains(option) and response.question.getCorrectOptions().contains(option)}" class="glyphicon glyphicon-ok"></span>
+                    <span th:if="${response.getSelectedOptions().contains(option) and !response.question.getCorrectOptions().contains(option)}" class="glyphicon glyphicon-remove"></span>
+                    <span th:classappend="${response.question.getCorrectOptions().contains(option)}?'text-bold' : ''" th:text="${option.text}"></span>
                 </li>
             </ul>
         </div>
@@ -73,7 +74,7 @@
             FB.ui({
                 method: 'feed',
                 link: 'https://policat.herokuapp.com',
-                name: "I just completed a "+domain+" quiz from PoliCAT!",
+                name: "I just completed a "+domain+" domain from PoliCAT!",
                 description: "And I got a score of: "+score+"%"
             }, function(response){});
         }

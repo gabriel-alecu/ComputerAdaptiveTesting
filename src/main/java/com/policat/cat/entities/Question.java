@@ -87,7 +87,7 @@ public class Question {
     }
 
     @Transient
-    public Set<Option> getCorrectAnswers() {
+    public Set<Option> getCorrectOptions() {
         Set<Option> correctOptions = new HashSet<>();
         for(Option option : options) {
             if(option.getCorrect()) {

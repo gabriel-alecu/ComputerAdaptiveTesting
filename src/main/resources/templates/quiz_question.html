@@ -15,11 +15,11 @@
 
         <div style="text-align: right"> <h4 style="color:#004669"><b>Time left: <span id="clockdiv"></span></b></h4></div><br/>
 
-        <h3><b><div th:text="${ongoingQuiz.getCurrentQuestion().getText()}"></div></b></h3><hr/>
+        <h3><b><div th:text="${quiz.getCurrentQuestion().getText()}"></div></b></h3><hr/>
 
         <div >
-            <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${ongoingQuiz}">
-               <div class="option" th:each="option : ${ongoingQuiz.currentQuestion.options}">
+            <form id="questionForm" th:action="@{/quiz/question}" method="post" th:object="${quiz}">
+               <div class="option" th:each="option : ${quiz.currentQuestion.options}">
                  <input type="checkbox" th:field="*{currentSelectedAnswers}" th:value="${option.id}" />
                   <label th:for="${#ids.prev('currentSelectedAnswers')}" th:text="${option.text}">Answer</label>
               </div>

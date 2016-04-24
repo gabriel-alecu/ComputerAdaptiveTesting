@@ -18,7 +18,7 @@ public class Quiz {
     private ArrayList<Long> currentSelectedAnswers = new ArrayList<>();
     private Date questionTimeLimit;
     private Boolean completed = false;
-    private ArrayList<Response> questionsResponses = new ArrayList<>();
+    private ArrayList<Response> responses = new ArrayList<>();
 
     public Quiz() {
     }
@@ -72,15 +72,15 @@ public class Quiz {
         this.completed = completed;
     }
 
-    public ArrayList<Response> getQuestionsResponses() {
-        return questionsResponses;
+    public ArrayList<Response> getResponses() {
+        return responses;
     }
 
-    public void setQuestionsResponses(ArrayList<Response> questionsResponses) {
-        this.questionsResponses = questionsResponses;
+    public void setResponses(ArrayList<Response> responses) {
+        this.responses = responses;
     }
 
-    public void addQuestionResponse(Response response) {
-        this.questionsResponses.add(response);
+    public void addResponse(Response response) {
+        this.responses.add(response);
     }
 }

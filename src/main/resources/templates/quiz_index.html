@@ -22,8 +22,8 @@
 <div class="col-sm-8 text-left">
     <h3>Select the programming language:</h3>
     <form th:action="@{/quiz}" method="post" role="form">
-        <div class="radio" th:each="q : ${quizzes}">
-            <label><input type="radio" name="domain" th:value="${q.getId()}" th:text="${q.getName()}"/> </label>
+        <div class="radio" th:each="d : ${domains}">
+            <label><input type="radio" name="domain" th:value="${d.getId()}" th:text="${d.getName()}"/> </label>
         </div>
         <input type="submit" value="Begin Quiz"/>
 

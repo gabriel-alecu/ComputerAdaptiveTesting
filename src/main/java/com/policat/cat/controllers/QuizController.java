@@ -24,7 +24,7 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/quiz")
-@SessionAttributes("ongoingQuiz")
+@SessionAttributes("quiz")
 public class QuizController {
     @Autowired
     private QuizService quizService;
@@ -36,24 +36,24 @@ public class QuizController {
     QuizResultRepository quizResultRepository;
 
 
-    @ModelAttribute("ongoingQuiz")
+    @ModelAttribute("quiz")
     public Quiz getDefaultQuiz() {
         return new Quiz();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showQuizzesList(Model model) {
+    public String showDomainsList(Model model) {
         AuthedUser auth = (AuthedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = auth.getUser();
 
-        model.addAttribute("quizzes", domainRepository.findAll());
+        model.addAttribute("domains", domainRepository.findAll());
         model.addAttribute("resolved", quizResultRepository.findByUser(user));
         return "quiz_index";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String startQuiz(@ModelAttribute("quiz") Long quizId, Model model) {
-        Domain domain = quizService.getDomainWithQuestions(quizId);
+    public String startQuiz(@ModelAttribute("domain") Long id, Model model) {
+        Domain domain = quizService.getDomainWithQuestions(id);
         if (domain == null) {
             return "quiz_index";
         }
@@ -66,7 +66,7 @@ public class QuizController {
     }
 
     @RequestMapping(value="/question", method = RequestMethod.GET)
-    public String displayChoice(@ModelAttribute("ongoingQuiz") Quiz quiz, SessionStatus sessionStatus) {
+    public String displayChoice(@ModelAttribute Quiz quiz, SessionStatus sessionStatus) {
         //if you get on this page directly, without starting a quiz first
         if(quiz.getDomain() == null || quiz.getCompleted()) {
             sessionStatus.setComplete();
@@ -90,7 +90,7 @@ public class QuizController {
     }
 
     @RequestMapping(value="/question", method = RequestMethod.POST)
-    public String processChoice(@ModelAttribute("ongoingQuiz") Quiz quiz, SessionStatus sessionStatus) {
+    public String processChoice(@ModelAttribute Quiz quiz, SessionStatus sessionStatus) {
         if(quiz.getDomain() == null || quiz.getCompleted()) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
@@ -120,7 +120,7 @@ public class QuizController {
         }
 
         Response response = new Response(quiz.getCurrentQuestion(), selectedOptions);
-        quiz.addQuestionResponse(response);
+        quiz.addResponse(response);
 
         quizService.debugLastResponse(quiz);
 
@@ -132,7 +132,7 @@ public class QuizController {
     }
 
     @RequestMapping(value="/result", method = RequestMethod.GET)
-    public String displayResults(@ModelAttribute("ongoingQuiz") Quiz quiz, SessionStatus sessionStatus, Model model) {
+    public String displayResults(@ModelAttribute Quiz quiz, SessionStatus sessionStatus, Model model) {
         if(quiz.getDomain() == null) {
             sessionStatus.setComplete();
             return "redirect:/quiz";
@@ -151,7 +151,6 @@ public class QuizController {
 
         QuizResult quizResult = new QuizResult(score, user, domain);
         quizResultRepository.save(quizResult);
-
         model.addAttribute(quizResult);
 
         return "quiz_result";

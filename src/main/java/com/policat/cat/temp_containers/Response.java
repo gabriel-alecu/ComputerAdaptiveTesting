@@ -25,7 +25,7 @@ public class Response {
     }
 
     public Boolean isCorrect() {
-        Set<Option> correctOptions = this.question.getCorrectAnswers();
+        Set<Option> correctOptions = this.question.getCorrectOptions();
         Set<Option> userOptions = this.selectedOptions;
         return correctOptions.equals(userOptions);
     }
