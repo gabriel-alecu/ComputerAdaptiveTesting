@@ -1,6 +1,9 @@
 package com.policat.cat.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="[option]")
@@ -9,11 +12,12 @@ public class Option {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false)
     private String text;
 
     @Column(nullable = false)
-    private Boolean isCorrect;
+    private Boolean correct=false;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -22,14 +26,18 @@ public class Option {
 
     public Option() {}
 
-    public Option(String text, Boolean isCorrect, Question question) {
+    public Option(String text, Boolean correct, Question question) {
         this.text = text;
-        this.isCorrect = isCorrect;
+        this.correct = correct;
         this.question = question;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -41,11 +49,11 @@ public class Option {
     }
 
     public Boolean getCorrect() {
-        return isCorrect;
+        return correct;
     }
 
     public void setCorrect(Boolean correct) {
-        isCorrect = correct;
+        this.correct = correct;
     }
 
     public Question getQuestion() {

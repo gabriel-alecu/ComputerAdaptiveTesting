@@ -31,7 +31,7 @@ public class Question {
     @JoinColumn(nullable = false)
     private Domain domain;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Option> options = new ArrayList<>();
 
 
@@ -52,6 +52,10 @@ public class Question {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -84,6 +88,16 @@ public class Question {
 
     public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    @Transient
+    public void addOption(Option option) {
+        this.options.add(option);
+    }
+
+    @Transient
+    public void removeOption(Option option) {
+        this.options.remove(option);
     }
 
     @Transient

@@ -1,8 +1,8 @@
 package com.policat.cat.services;
 
 import com.policat.cat.auth.AuthedUser;
-import com.policat.cat.temp_containers.PasswordChangeDTO;
-import com.policat.cat.temp_containers.UserRegistrationDTO;
+import com.policat.cat.dtos.PasswordChangeDTO;
+import com.policat.cat.dtos.UserRegistrationDTO;
 import com.policat.cat.entities.User;
 import com.policat.cat.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService implements UserDetailsService {

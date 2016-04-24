@@ -84,15 +84,7 @@
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </li>
-
-                <li sec:authorize="hasAuthority('ADMIN')" class="dropdown" th:classappend="${#httpServletRequest.getRequestURI() == '/admin' || #httpServletRequest.getRequestURI() == '/addQ' || #httpServletRequest.getRequestURI() == '/addAdm'}?'active' : ''">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin menu<span class="caret"></span><span class="pull-right glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin'}?'active' : ''"><a th:href="@{/admin}">Admin Home</a></li>
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/addQ'}?'active' : ''"><a th:href="@{/addQ}">Add Questions</a></li>
-                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/addAdm'}?'active' : ''"><a th:href="@{/addAdm}">Add another admin</a></li>
-                    </ul>
-                </li>
+                <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${#httpServletRequest.getRequestURI() == '/managedb'}?'active' : ''"><a th:href="@{/managedb}">Manage Database<span class="pull-right glyphicon glyphicon-list-alt"></span></a></li>
 
                 <li><a href="https://docs.google.com/forms/d/1JWsaoGHBHaFwy6WgtyHyo2gmENw-MndYKpB1xRf5Rkg/viewform" target="_blank">Feedback<span class="pull-right glyphicon glyphicon-pencil"></span></a></li>
 

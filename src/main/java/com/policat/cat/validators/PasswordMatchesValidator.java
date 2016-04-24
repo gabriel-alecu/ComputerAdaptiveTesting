@@ -1,7 +1,6 @@
 package com.policat.cat.validators;
 
-import com.policat.cat.temp_containers.PasswordCheckDTO;
-import com.policat.cat.temp_containers.UserRegistrationDTO;
+import com.policat.cat.dtos.PasswordCheckDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

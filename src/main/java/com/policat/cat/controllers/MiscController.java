@@ -3,12 +3,11 @@ package com.policat.cat.controllers;
 import com.policat.cat.auth.AuthedUser;
 import com.policat.cat.entities.User;
 import com.policat.cat.services.UserService;
-import com.policat.cat.temp_containers.PasswordChangeDTO;
+import com.policat.cat.dtos.PasswordChangeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 

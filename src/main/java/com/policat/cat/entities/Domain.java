@@ -19,10 +19,10 @@ public class Domain implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "domain")
+    @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "domain")
+    @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL)
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
@@ -72,5 +72,10 @@ public class Domain implements Serializable {
     @Transient
     public void addQuestion(Question question) {
         this.questions.add(question);
+    }
+
+    @Transient
+    public void removeQuestion(Question question) {
+        this.questions.remove(question);
     }
 }

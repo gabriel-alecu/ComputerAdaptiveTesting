@@ -1,8 +1,7 @@
-package com.policat.cat.temp_containers;
+package com.policat.cat.dtos;
 
 import com.policat.cat.validators.PasswordMatches;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @PasswordMatches

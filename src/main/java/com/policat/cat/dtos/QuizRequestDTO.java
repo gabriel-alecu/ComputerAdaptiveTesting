@@ -1,4 +1,4 @@
-package com.policat.cat.temp_containers;
+package com.policat.cat.dtos;
 
 import com.policat.cat.entities.Domain;
 

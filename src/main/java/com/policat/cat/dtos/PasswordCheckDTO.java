@@ -1,4 +1,4 @@
-package com.policat.cat.temp_containers;
+package com.policat.cat.dtos;
 
 public interface PasswordCheckDTO {
     String getPassword();

@@ -1,4 +1,4 @@
-package com.policat.cat.temp_containers;
+package com.policat.cat.session;
 
 import com.policat.cat.entities.Option;
 import com.policat.cat.entities.Question;

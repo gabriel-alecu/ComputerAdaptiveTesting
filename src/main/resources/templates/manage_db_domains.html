@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+            xmlns:th="http://www.thymeleaf.org"
+            layout:decorator="layout">
+<head>
+    <title>Edit Domains</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="jumbotron">
+        <h1>Edit Domains</h1>
+    </div>
+
+    <ol class="breadcrumb">
+        <li class="active">Domains</li>
+    </ol>
+
+    <h2>Edit existing domains</h2>
+    <div class="domains_list">
+         <div class="domain" th:each="d : ${domains}">
+             <form class="form-inline" method="post" th:action="@{/managedb/domain/rename}">
+                 <input type="hidden" name="id" th:value="${d.id}"/>
+                 <input type="text" class="form-control" title="Domain name" name="name" th:value="${d.name}"/>
+                 <button type="submit" class="btn btn-warning">Rename</button>
+
+                 <a class="btn btn-danger" th:href="@{/managedb/domain/{id}/delete(id=${d.id})}">Remove</a>
+                 <a class="btn btn-primary" th:href="@{/managedb/domain/{id}(id=${d.id})}">View Questions</a>
+             </form>
+         </div>
+    </div>
+
+    <h2>Add new domain</h2>
+    <form class="form-inline" method="post" th:action="@{/managedb/domain/add}">
+        <div class="form-group">
+            <label for="name">Domain name</label>
+            <input type="text" class="form-control" id="name" name="name"/>
+        </div>
+        <button type="submit" class="btn btn-default">Add Domain</button>
+    </form>
+</div>
+</body>
+</html>
