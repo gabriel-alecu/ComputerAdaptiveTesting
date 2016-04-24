@@ -6,14 +6,14 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_sb8bbouer5wak8vyiiy4pf2bx` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `domain` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_imux4m190glnqxeh8gapkk2t` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `question` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -23,7 +23,7 @@ CREATE TABLE `question` (
   PRIMARY KEY (`id`),
   KEY `FK_d0yhf4xgi1a0y6m5v1vqexwq4` (`domain_id`),
   CONSTRAINT `FK_d0yhf4xgi1a0y6m5v1vqexwq4` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `option` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -33,7 +33,7 @@ CREATE TABLE `option` (
   PRIMARY KEY (`id`),
   KEY `FK_eix9du6u2r4wxwu415wq8yb99` (`question_id`),
   CONSTRAINT `FK_eix9du6u2r4wxwu415wq8yb99` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=806 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `quiz_result` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -46,4 +46,4 @@ CREATE TABLE `quiz_result` (
   KEY `FK_59ramm9rk8gpqv1oim47sl0v8` (`user_id`),
   CONSTRAINT `FK_59ramm9rk8gpqv1oim47sl0v8` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_b040f9cqq1oxnjahhi59jyy8v` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
