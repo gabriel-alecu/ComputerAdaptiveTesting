@@ -16,7 +16,7 @@ apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'cat'
-	version = '1.0.0-RELEASE'
+	version = '1.0.1-RELEASE'
 	manifest {
 		attributes 'Main-Class': 'com.policat.cat.CatApplication'
 	}
