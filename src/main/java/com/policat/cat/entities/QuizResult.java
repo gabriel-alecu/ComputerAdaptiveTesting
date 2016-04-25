@@ -26,12 +26,20 @@ public class QuizResult {
     private Domain domain;
 
 
-    public Long getId() {
-        return id;
+    public QuizResult() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public QuizResult(Integer score, User user, Domain domain) {
+        Calendar calendar = Calendar.getInstance();
+        this.date = calendar.getTime();
+
+        this.score = score;
+        this.user = user;
+        this.domain = domain;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Integer getScore() {

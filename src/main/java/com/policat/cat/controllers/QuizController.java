@@ -149,10 +149,7 @@ public class QuizController {
 
         Domain domain = quiz.getDomain();
 
-        QuizResult quizResult = new QuizResult();
-        quizResult.setScore(score);
-        quizResult.setUser(user);
-        quizResult.setDomain(domain);
+        QuizResult quizResult = new QuizResult(score, user, domain);
         quizResultRepository.save(quizResult);
         model.addAttribute(quizResult);
 
