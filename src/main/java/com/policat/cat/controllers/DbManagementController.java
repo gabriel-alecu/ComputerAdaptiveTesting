@@ -46,7 +46,7 @@ public class DbManagementController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showDomains() {
+    public String viewDomains() {
         return "manage_db_domains";
     }
 
@@ -74,7 +74,7 @@ public class DbManagementController {
 
 
     @RequestMapping(value = "/domain/{id}", method = RequestMethod.GET)
-    public String viewQuestions(@PathVariable Long id, Model model) {
+    public String viewDomainQuestions(@PathVariable Long id, Model model) {
         Domain domain = domainRepository.findOne(id);
         List<QuestionStatsDTO> questionsStats = new ArrayList<>();
         List<Object[]> questionsStatsRows = questionRepository.getWithStatsByDomain(domain);

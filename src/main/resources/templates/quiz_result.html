@@ -31,9 +31,17 @@
         <h1>Result</h1>
     </div>
 
-    <h2>Quiz completed successfully!</h2>
+    <h2>Quiz completed!</h2>
     <!--/*@thymesVar id="quizResult" type="com.policat.cat.entities.QuizResult"*/-->
     <h3>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h3>
+
+    <p th:if="${quizResult.score le 25}">You seem to not be sufficiently prepared.<br/>
+        To improve your level, you may use <a th:href="@{/tutorials}">our tutorials</a></p>
+    <p th:if="${quizResult.score gt 25 and quizResult.score le 50}">You are partially prepared, but you should learn further.<br/>
+        To improve your level, you may use <a th:href="@{/tutorials}">our tutorials</a></p>
+    <p th:if="${quizResult.score gt 50 and quizResult.score le 75}">You are sufficiently prepared. Well done!</p>
+    <p th:if="${quizResult.score gt 75}">You are very well prepared. Congratulations!</p>
+
     <!--<p><a th:href="@{/index}">Click here to go back to the main page</a></p>-->
     <div align="center">
         <a th:href="'javascript:share(' + ${quizResult.score} + ',\'' + ${quizResult.domain.name} + '\');'">
