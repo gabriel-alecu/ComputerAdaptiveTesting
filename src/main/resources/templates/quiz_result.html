@@ -33,7 +33,7 @@
 
     <h2>Quiz completed!</h2>
     <!--/*@thymesVar id="quizResult" type="com.policat.cat.entities.QuizResult"*/-->
-    <h3>Your score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '%'}"/></b></h3>
+    <h3>Your preparation score is: &nbsp;&nbsp;&nbsp;<b><span th:text="${quizResult.score + '/100'}"/></b></h3>
 
     <p th:if="${quizResult.score le 25}">You seem to not be sufficiently prepared.<br/>
         To improve your level, you may use <a th:href="@{/tutorials}">our tutorials</a></p>
@@ -90,7 +90,7 @@
                 method: 'feed',
                 link: 'https://policat.herokuapp.com',
                 name: "I just completed a " + domain + " domain from PoliCAT!",
-                description: "And I got a score of: " + score + "%"
+                description: "And I got a score of: " + score + "/100"
             }, function (response) {
             });
         }
