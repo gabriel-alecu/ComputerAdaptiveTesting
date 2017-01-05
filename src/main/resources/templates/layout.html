@@ -116,6 +116,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li th:classappend="${#httpServletRequest.getRequestURI() == '/about'}?'active' : ''"><a
                                 th:href="@{/about}">About</a></li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI() == '/results'}?'active' : ''"><a
+                                th:href="@{/results}">Results</a></li>
                         <li th:classappend="${#httpServletRequest.getRequestURI() == '/contact'}?'active' : ''"><a
                                 th:href="@{/contact}">Contact</a></li>
                         <li><a href="https://github.com/gabe-alex/ComputerAdaptiveTesting" target="_blank">GitHub</a>
