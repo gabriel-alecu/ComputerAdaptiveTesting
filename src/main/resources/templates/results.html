@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<head>
+    <title>Results</title>
+
+
+</head>
+<body>
+
+<h5>&nbsp;&nbsp;&nbsp;Welcome! &nbsp; <a th:href="@{/logout}"><b>[Logout]</b></a></h5>
+
+
+<div layout:fragment="content">
+    <div class="jumbotron">
+        <h1>Results</h1>
+    </div>
+
+    <div class="col-sm-8 text-left">
+
+        <p> The students of the POLITEHNICA University Bucharest, Computer Science - French Stream (Melania NITU and Gabriel ALECU), coordinated by assistant
+        prof. Maria-Iuliana Dascalu, PhD, were awarded in the finals of the Java National Competition for Universities, organised
+        by ADFABER, with the support of Oracle Academy (2016). Being more than 70 participants, CAT application obtained first prize.</p>
+
+    </div>
+    <div class="col-sm-4 text-left">
+        <img class="img-responsive" src="images/oracle.jpeg"/>
+    </div>
+    </div>
+</body>
+</html>
