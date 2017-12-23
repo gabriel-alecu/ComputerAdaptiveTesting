@@ -31,6 +31,10 @@ public class Question {
     @JoinColumn(nullable = false)
     private Domain domain;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private QuestionTag questionTag;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Option> options = new ArrayList<>();
 
@@ -65,6 +69,14 @@ public class Question {
 
     public void setDomain(Domain domain) {
         this.domain = domain;
+    }
+
+    public QuestionTag getQuestionTag() {
+        return questionTag;
+    }
+
+    public void setQuestionTag(QuestionTag questionTag) {
+        this.questionTag = questionTag;
     }
 
     public List<Option> getOptions() {

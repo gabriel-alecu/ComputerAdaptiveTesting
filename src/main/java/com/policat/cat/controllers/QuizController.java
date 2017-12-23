@@ -6,7 +6,7 @@ import com.policat.cat.repositories.DomainRepository;
 import com.policat.cat.repositories.QuizResultRepository;
 import com.policat.cat.services.QuizService;
 import com.policat.cat.session.Quiz;
-import com.policat.cat.session.Response;
+import com.policat.cat.entities.QuestionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/quiz")
@@ -119,7 +116,7 @@ public class QuizController {
             }
         }
 
-        Response response = new Response(quiz.getCurrentQuestion(), selectedOptions);
+        QuestionResponse response = new QuestionResponse(quiz.getCurrentQuestion(), selectedOptions);
         quiz.addResponse(response);
 
         quizService.debugLastResponse(quiz);
@@ -149,7 +146,9 @@ public class QuizController {
 
         Domain domain = quiz.getDomain();
 
-        QuizResult quizResult = new QuizResult(score, user, domain);
+        List<QuestionResponse> questionResponses = quiz.getResponses();
+
+        QuizResult quizResult = new QuizResult(score, user, domain, questionResponses);
         quizResultRepository.save(quizResult);
         model.addAttribute(quizResult);
 

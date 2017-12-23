@@ -1,8 +1,10 @@
 package com.policat.cat.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class QuizResult {
@@ -25,21 +27,31 @@ public class QuizResult {
     @JoinColumn(nullable = false)
     private Domain domain;
 
+    @OneToMany(mappedBy = "quizResult", cascade = CascadeType.ALL)
+    private List<QuestionResponse> questionResponses = new ArrayList<>();
 
     public QuizResult() {
     }
 
-    public QuizResult(Integer score, User user, Domain domain) {
+    public QuizResult(Integer score, User user, Domain domain, List<QuestionResponse> questionResponses) {
         Calendar calendar = Calendar.getInstance();
         this.date = calendar.getTime();
-
         this.score = score;
         this.user = user;
         this.domain = domain;
+        this.questionResponses = questionResponses;
+
+        for(QuestionResponse questionResponse : this.questionResponses) {
+            questionResponse.setQuizResult(this);
+        }
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getScore() {
@@ -72,5 +84,13 @@ public class QuizResult {
 
     public void setDomain(Domain domain) {
         this.domain = domain;
+    }
+
+    public List<QuestionResponse> getQuestionResponses() {
+        return questionResponses;
+    }
+
+    public void setQuestionResponses(List<QuestionResponse> questionResponses) {
+        this.questionResponses = questionResponses;
     }
 }

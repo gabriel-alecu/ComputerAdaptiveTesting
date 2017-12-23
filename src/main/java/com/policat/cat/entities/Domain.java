@@ -21,6 +21,9 @@ public class Domain implements Serializable {
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL)
+    private List<QuestionTag> questionTags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL)
     private List<QuizResult> quizResults = new ArrayList<>();
 
 
@@ -46,6 +49,14 @@ public class Domain implements Serializable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<QuestionTag> getQuestionTags() {
+        return questionTags;
+    }
+
+    public void setQuestionTags(List<QuestionTag> questionTags) {
+        this.questionTags = questionTags;
     }
 
     public List<QuizResult> getQuizResults() {

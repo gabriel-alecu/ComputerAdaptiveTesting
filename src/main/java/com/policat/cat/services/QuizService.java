@@ -7,7 +7,7 @@ import com.policat.cat.entities.Question;
 import com.policat.cat.repositories.DomainRepository;
 import com.policat.cat.repositories.QuestionRepository;
 import com.policat.cat.session.Quiz;
-import com.policat.cat.session.Response;
+import com.policat.cat.entities.QuestionResponse;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class QuizService {
 
     public Question getQuestionWithScore(Integer score, Quiz quiz) {
         List<Long> usedQuestions = new ArrayList<>();
-        for (Response response : quiz.getResponses()) {
+        for (QuestionResponse response : quiz.getResponses()) {
             Question question = response.getQuestion();
             usedQuestions.add(question.getId());
         }
@@ -61,7 +61,7 @@ public class QuizService {
         return getQuestionOptions(chosen);
     }
 
-    public Integer computedResponseScore(Response response) {
+    public Integer computedResponseScore(QuestionResponse response) {
         Integer questionScore = response.getQuestion().getScore();
         if (response.isCorrect()) {
             questionScore = Math.min(++questionScore, QuizConfig.MAX_QUESTION_SCORE);
@@ -72,8 +72,8 @@ public class QuizService {
     }
 
     //the first NUM_SETUP_QUESTIONS responses are used for calibration, and are ignored in the scoring
-    public List<Response> getScoreResponses(Quiz quiz) {
-        List<Response> responses = quiz.getResponses();
+    public List<QuestionResponse> getScoreResponses(Quiz quiz) {
+        List<QuestionResponse> responses = quiz.getResponses();
         if (responses.size() < QuizConfig.NUM_SETUP_QUESTIONS) {
             return responses.subList(responses.size(), responses.size());
         }
@@ -82,13 +82,13 @@ public class QuizService {
 
     public Double calcMean(Quiz quiz) {
         Integer sumScores = 0;
-        List<Response> responses = getScoreResponses(quiz);
+        List<QuestionResponse> responses = getScoreResponses(quiz);
 
         if (responses.size() == 0) {
             return 0.0;
         }
 
-        for (Response response : responses) {
+        for (QuestionResponse response : responses) {
             sumScores += computedResponseScore(response);
         }
 
@@ -99,13 +99,13 @@ public class QuizService {
         //Standard deviation
         Double mean = calcMean(quiz);
         Double devSum = 0.0;
-        List<Response> responses = getScoreResponses(quiz);
+        List<QuestionResponse> responses = getScoreResponses(quiz);
 
         if (responses.size() == 0) {
             return 0.0;
         }
 
-        for (Response response : responses) {
+        for (QuestionResponse response : responses) {
             Integer questionScore = computedResponseScore(response);
             devSum += Math.pow((questionScore - mean), 2);
         }
@@ -126,7 +126,7 @@ public class QuizService {
             return null;
         }
 
-        Response mostRecentResponse = quiz.getMostRecentResponse();
+        QuestionResponse mostRecentResponse = quiz.getMostRecentResponse();
         Integer nextQuestionScore;
         if (mostRecentResponse.isCorrect()) {
             nextQuestionScore = Math.min(mostRecentResponse.getQuestion().getScore() + 1, QuizConfig.MAX_QUESTION_SCORE);
@@ -142,8 +142,8 @@ public class QuizService {
     }
 
     public void debugLastResponse(Quiz quiz) {
-        List<Response> responses = quiz.getResponses();
-        Response lastResponse = responses.get(quiz.getResponses().size() - 1);
+        List<QuestionResponse> responses = quiz.getResponses();
+        QuestionResponse lastResponse = responses.get(quiz.getResponses().size() - 1);
 
         System.out.print("Question ID: ");
         System.out.println(lastResponse.getQuestion().getId());
